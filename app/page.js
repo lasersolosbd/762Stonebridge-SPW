@@ -242,9 +242,11 @@ export default function StonebridgePage() {
           <p className="text-[#e8e0d0] leading-relaxed mb-11 max-w-[420px]" style={{ fontSize: "clamp(14px,1.5vw,17px)" }}>
             A 2019-built townhome where your front door opens directly into one of Longmont&apos;s most beautiful community parks. No, really — it&apos;s literally called the Parkes. Because of the park.
           </p>
-          <div className="flex items-center gap-5 flex-wrap">
+          {/* ── Hero CTAs — three buttons ── */}
+          <div className="flex items-center gap-4 flex-wrap">
             <a href="#contact" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-8 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px">Schedule a Tour →</a>
             <a href="#description" className="text-[#e8e0d0] border border-white/[0.08] hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200">See the Details</a>
+            <a href="#openhouse" className="text-[#e8e0d0] border border-white/[0.08] hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200">Open House Schedule</a>
           </div>
         </div>
         <div className="relative bg-[#243259] min-h-[360px] lg:min-h-0">
@@ -332,8 +334,9 @@ export default function StonebridgePage() {
                     </div>
                   ))}
                 </div>
-                <a href="#contact" className="mt-8 block text-center bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-colors duration-200">
-                  Schedule a Tour →
+                {/* Sticky card CTA now points to #openhouse since contact moved lower */}
+                <a href="#openhouse" className="mt-8 block text-center bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-colors duration-200">
+                  See Open House Dates →
                 </a>
               </div>
             </div>
@@ -341,43 +344,7 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ AI INTAKE ═════════════════════════════════════════════════════════ */}
-      <section id="contact" className="bg-[#ede6d8] py-24">
-        <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-6 h-px bg-[#c9973a]" />
-                <span className="text-[11px] font-medium text-[#c9973a] tracking-[0.14em] uppercase">Smart Intake</span>
-              </div>
-              <h2 className="text-[#1a2744] font-light leading-tight mb-5" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,4vw,48px)" }}>
-                Talk to an AI agent. <em className="italic text-[#c9973a]">Right now.</em>
-              </h2>
-              <p className="text-[16px] text-[#1a2744]/70 leading-[1.7] mb-8 max-w-[400px]">
-                Have questions about the property, the neighborhood, or the process? Our AI agent is available 24/7 — no hold music, no voicemail, no &quot;someone will be in touch.&quot; Just answers.
-              </p>
-              <ul className="space-y-2">
-                {[
-                  "Available 24 hours a day, 7 days a week",
-                  "Answer questions about the property instantly",
-                  "Schedule a tour or request showing info",
-                  "Connect to Mark Solomon directly if needed",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-sm font-medium text-[#1a2744]">
-                    <svg style={{ width: 18, height: 18 }} fill="none" stroke="#c9973a" strokeWidth={2} viewBox="0 0 24 24" className="flex-shrink-0">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <AIIntakeWidget />
-          </div>
-        </div>
-      </section>
-
-      {/* ══ GALLERY — above Neighborhood ══════════════════════════════════════ */}
+      {/* ══ GALLERY ═══════════════════════════════════════════════════════════ */}
       <section id="gallery" className="bg-[#f5f0e8] py-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="flex items-center gap-3 mb-4">
@@ -393,25 +360,25 @@ export default function StonebridgePage() {
 
           <PhotoGallery />
 
-          {/* Gallery CTA */}
+          {/* Gallery CTAs — both point down the page */}
           <div className="mt-14 flex flex-col sm:flex-row items-center gap-5 justify-center">
             <a
-              href="#contact"
+              href="#openhouse"
               className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-10 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px"
             >
-              Schedule a Tour →
+              See Open House Dates →
             </a>
             <a
-              href="#openhouse"
+              href="#contact"
               className="text-[#1a2744] border border-[#1a2744]/20 hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-8 py-4 rounded-lg tracking-widest uppercase transition-all duration-200"
             >
-              See Open House Dates
+              Talk to the AI Agent
             </a>
           </div>
         </div>
       </section>
 
-      {/* ══ NEIGHBORHOOD — below Gallery ══════════════════════════════════════ */}
+      {/* ══ NEIGHBORHOOD ══════════════════════════════════════════════════════ */}
       <section id="neighborhood" className="bg-[#1a2744] py-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="flex items-center gap-3 mb-4">
@@ -471,7 +438,7 @@ export default function StonebridgePage() {
                 No pressure, no hard sell, no one following you from room to room saying &quot;can you just picture yourself here?&quot; Come see the home, walk the park, ask questions — or just enjoy the finishes.
               </p>
               <p className="text-[15px] text-[#1a2744]/65 leading-[1.75] mb-8">
-                Tours can also be scheduled privately at a time that works for you. Use the AI agent above or call Mark directly.
+                Tours can also be scheduled privately at a time that works for you. Use the AI agent below or call Mark directly.
               </p>
               <a href="tel:8168535467" className="inline-flex items-center gap-2 bg-[#1a2744] hover:bg-[#243259] text-white text-[13px] font-semibold px-8 py-4 rounded-lg tracking-widest uppercase transition-colors duration-200">
                 📞 Call Mark: (816) 853-5467
@@ -492,7 +459,6 @@ export default function StonebridgePage() {
                     className="grid items-start gap-5 px-7 py-6"
                     style={{ gridTemplateColumns: oh.day ? "64px 1fr" : "1fr" }}
                   >
-                    {/* Date column — only rendered when a date exists */}
                     {oh.day && (
                       <div className="text-center pt-1">
                         <div className="text-[10px] font-semibold text-[#c9973a] tracking-widest uppercase">{oh.month}</div>
@@ -500,8 +466,6 @@ export default function StonebridgePage() {
                         <div className="text-[10px] font-medium text-[#1a2744]/40 tracking-widest uppercase">{oh.dow}</div>
                       </div>
                     )}
-
-                    {/* Content column */}
                     <div>
                       <span className={`inline-block mb-2 text-[10px] font-bold px-3 py-1 rounded-full tracking-wider uppercase ${oh.badgeStyle === "gold" ? "bg-[#c9973a] text-white" : "bg-[#1a2744]/10 text-[#1a2744]"}`}>
                         {oh.badge}
@@ -526,6 +490,42 @@ export default function StonebridgePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══ AI INTAKE — below Open House ══════════════════════════════════════ */}
+      <section id="contact" className="bg-[#ede6d8] py-24">
+        <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-6 h-px bg-[#c9973a]" />
+                <span className="text-[11px] font-medium text-[#c9973a] tracking-[0.14em] uppercase">Smart Intake</span>
+              </div>
+              <h2 className="text-[#1a2744] font-light leading-tight mb-5" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,4vw,48px)" }}>
+                Talk to an AI agent. <em className="italic text-[#c9973a]">Right now.</em>
+              </h2>
+              <p className="text-[16px] text-[#1a2744]/70 leading-[1.7] mb-8 max-w-[400px]">
+                Have questions about the property, the neighborhood, or the process? Our AI agent is available 24/7 — no hold music, no voicemail, no &quot;someone will be in touch.&quot; Just answers.
+              </p>
+              <ul className="space-y-2">
+                {[
+                  "Available 24 hours a day, 7 days a week",
+                  "Answer questions about the property instantly",
+                  "Schedule a tour or request showing info",
+                  "Connect to Mark Solomon directly if needed",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm font-medium text-[#1a2744]">
+                    <svg style={{ width: 18, height: 18 }} fill="none" stroke="#c9973a" strokeWidth={2} viewBox="0 0 24 24" className="flex-shrink-0">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <AIIntakeWidget />
           </div>
         </div>
       </section>
