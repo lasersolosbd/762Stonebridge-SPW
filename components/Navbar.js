@@ -17,9 +17,19 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // If we are not on the home page, force the dark navigation style
+  // If we are not on the home page, force the dark navigation style.
+  // NOTE: On the SPW (762stonebridge), the hero is always dark navy, so the
+  // navbar is effectively always "dark" — the transparent state sits over a
+  // dark background, meaning we always want the light Real Broker logo.
+  // forceDarkNav controls the navbar background/text colors (transparent vs
+  // solid), while realBrokerLogoSrc always returns the light logo so it's
+  // visible against the dark hero before the user scrolls.
   const isHome = pathname === "/";
   const forceDarkNav = !isHome || scrolled;
+
+  // Always use the light logo on this site — the navbar is always over a dark
+  // background (dark navy hero before scroll, dark solid nav after scroll).
+  const realBrokerLogoSrc = "/real-broker-logo-light.png";
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -49,9 +59,7 @@ export default function Navbar() {
             />
             <div className="flex flex-col leading-none">
               <span
-                className={`text-lg font-semibold tracking-wide transition-colors duration-300 ${
-                  forceDarkNav ? "text-white" : "text-[#0f172a]"
-                }`}
+                className="text-lg font-semibold tracking-wide text-white transition-colors duration-300"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Solomon
@@ -63,15 +71,11 @@ export default function Navbar() {
           </Link>
 
           {/* 2. Co-Branding Divider Line */}
-          <div
-            className={`w-px h-8 transition-colors duration-300 ${
-              forceDarkNav ? "bg-white/20" : "bg-stone-300"
-            }`}
-          ></div>
+          <div className="w-px h-8 bg-white/20 transition-colors duration-300"></div>
 
-          {/* 3. Real Broker Logo (Swaps based on forced dark nav or scroll) */}
+          {/* 3. Real Broker Logo — always light since background is always dark */}
           <img
-            src={forceDarkNav ? "/real-broker-logo-light.png" : "/real-broker-logo-dark.png"}
+            src={realBrokerLogoSrc}
             alt="Real Broker, LLC"
             className="h-6 w-auto object-contain transition-opacity duration-300"
           />
@@ -84,7 +88,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium tracking-widest uppercase transition-colors duration-200 relative group ${
-                forceDarkNav ? "text-stone-200 hover:text-[#c9a84c]" : "text-slate-600 hover:text-[#0f172a]"
+                forceDarkNav ? "text-stone-200 hover:text-[#c9a84c]" : "text-white/80 hover:text-white"
               }`}
             >
               {link.label}
@@ -102,9 +106,7 @@ export default function Navbar() {
         {/* Mobile Menu Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`md:hidden transition-colors ${
-            forceDarkNav ? "text-white hover:text-[#c9a84c]" : "text-[#0f172a] hover:text-[#c9a84c]"
-          }`}
+          className="md:hidden text-white hover:text-[#c9a84c] transition-colors"
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
