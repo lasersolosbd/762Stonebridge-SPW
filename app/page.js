@@ -242,11 +242,11 @@ export default function StonebridgePage() {
           <p className="text-[#e8e0d0] leading-relaxed mb-11 max-w-[420px]" style={{ fontSize: "clamp(14px,1.5vw,17px)" }}>
             A 2019-built townhome where your front door opens directly into one of Longmont&apos;s most beautiful community parks. No, really — it&apos;s literally called the Parkes. Because of the park.
           </p>
-          {/* ── Hero CTAs — three buttons ── */}
-          <div className="flex items-center gap-4 flex-wrap">
-            <a href="#contact" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-8 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px">Schedule a Tour →</a>
-            <a href="#description" className="text-[#e8e0d0] border border-white/[0.08] hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200">See the Details</a>
-            <a href="#openhouse" className="text-[#e8e0d0] border border-white/[0.08] hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200">Open House Schedule</a>
+          {/* ── Hero CTAs — three buttons, all on one row ── */}
+          <div className="flex items-center gap-3 flex-nowrap">
+            <a href="#contact" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px whitespace-nowrap">Schedule a Tour →</a>
+            <a href="#description" className="text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap">See the Details</a>
+            <a href="#openhouse" className="text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap">Open House</a>
           </div>
         </div>
         <div className="relative bg-[#243259] min-h-[360px] lg:min-h-0">
