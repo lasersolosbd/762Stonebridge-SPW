@@ -2,60 +2,96 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-// ─── PHOTO DATA ───────────────────────────────────────────────────────────────
-// To add/remove photos: edit this array.
-// src: path relative to /public (e.g. "/photos/01-exterior.jpg")
-// label: used as alt text and lightbox caption
+// ─────────────────────────────────────────────────────────────────────────────
+//  PHOTO CONFIG
+//  ─────────────────────────────────────────────────────────────────────────────
+//  When your photos arrive, fill this array in the order you want them
+//  displayed. Use the exact filenames — no renaming needed.
+//
+//  · src   → path inside /public/  (e.g. "/photos/IMG_4821.jpg")
+//  · label → caption shown in the lightbox (keep it short)
+//
+//  To add or remove photos, just add/remove objects from this array.
+//  The gallery will automatically adjust the grid and counter.
+//
+//  EXAMPLE:
+//    { src: "/photos/IMG_4821.jpg",  label: "Front exterior"       },
+//    { src: "/photos/DSC_0042.jpg",  label: "Living room"          },
+//    { src: "/photos/IMG_4830.jpg",  label: "Kitchen"              },
+//
+// ─────────────────────────────────────────────────────────────────────────────
 const PHOTOS = [
-  { src: "/photos/01-exterior-front.jpg",    label: "Exterior — Front" },
-  { src: "/photos/02-exterior-street.jpg",   label: "Street View" },
-  { src: "/photos/03-entry.jpg",             label: "Entry" },
-  { src: "/photos/04-living-room.jpg",       label: "Living Room" },
-  { src: "/photos/05-living-room-2.jpg",     label: "Living Room — Alternate View" },
-  { src: "/photos/06-kitchen.jpg",           label: "Kitchen" },
-  { src: "/photos/07-kitchen-2.jpg",         label: "Kitchen — Detail" },
-  { src: "/photos/08-dining.jpg",            label: "Dining Area" },
-  { src: "/photos/09-primary-bedroom.jpg",   label: "Primary Bedroom" },
-  { src: "/photos/10-primary-bedroom-2.jpg", label: "Primary Bedroom — Alternate View" },
-  { src: "/photos/11-primary-bath.jpg",      label: "Primary Bathroom" },
-  { src: "/photos/12-primary-bath-2.jpg",    label: "Primary Bathroom — Detail" },
-  { src: "/photos/13-bedroom-2.jpg",         label: "Bedroom 2" },
-  { src: "/photos/14-bedroom-3.jpg",         label: "Bedroom 3" },
-  { src: "/photos/15-full-bath.jpg",         label: "Full Bathroom" },
-  { src: "/photos/16-half-bath.jpg",         label: "Half Bath" },
-  { src: "/photos/17-study-loft.jpg",        label: "The Study — Top of Stairs" },
-  { src: "/photos/18-study-loft-2.jpg",      label: "The Study — Alternate View" },
-  { src: "/photos/19-garage.jpg",            label: "2-Car Garage" },
-  { src: "/photos/20-garage-interior.jpg",   label: "Garage Interior" },
-  { src: "/photos/21-laundry.jpg",           label: "Laundry" },
-  { src: "/photos/22-backyard.jpg",          label: "Outdoor Space" },
-  { src: "/photos/23-park-view.jpg",         label: "Community Park — Right Outside" },
-  { src: "/photos/24-park-trail.jpg",        label: "Walking Trail" },
-  { src: "/photos/25-community.jpg",         label: "Parkes at Stonebridge Community" },
+  // ── Exterior ─────────────────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_01.jpg", label: "Front exterior"            },
+  { src: "/photos/PLACEHOLDER_02.jpg", label: "Rear / patio"              },
+  { src: "/photos/PLACEHOLDER_03.jpg", label: "Park view from front door" },
+
+  // ── Main Living ───────────────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_04.jpg", label: "Living room"               },
+  { src: "/photos/PLACEHOLDER_05.jpg", label: "Living room — alternate"   },
+  { src: "/photos/PLACEHOLDER_06.jpg", label: "Dining area"               },
+
+  // ── Kitchen ───────────────────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_07.jpg", label: "Kitchen"                   },
+  { src: "/photos/PLACEHOLDER_08.jpg", label: "Kitchen — counters"        },
+  { src: "/photos/PLACEHOLDER_09.jpg", label: "Kitchen — appliances"      },
+
+  // ── Primary Bedroom & Bath ────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_10.jpg", label: "Primary bedroom"           },
+  { src: "/photos/PLACEHOLDER_11.jpg", label: "Primary bedroom — detail"  },
+  { src: "/photos/PLACEHOLDER_12.jpg", label: "Primary bathroom"          },
+
+  // ── Secondary Bedrooms ────────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_13.jpg", label: "Bedroom 2"                 },
+  { src: "/photos/PLACEHOLDER_14.jpg", label: "Bedroom 3"                 },
+
+  // ── Bathrooms ─────────────────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_15.jpg", label: "Full bathroom"             },
+  { src: "/photos/PLACEHOLDER_16.jpg", label: "Half bath"                 },
+
+  // ── Study & Bonus ─────────────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_17.jpg", label: "Study at top of stairs"    },
+  { src: "/photos/PLACEHOLDER_18.jpg", label: "Study — alternate angle"   },
+
+  // ── Garage & Storage ──────────────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_19.jpg", label: "2-car garage"              },
+
+  // ── Community & Neighborhood ──────────────────────────────────────────────
+  { src: "/photos/PLACEHOLDER_20.jpg", label: "Community park"            },
+  { src: "/photos/PLACEHOLDER_21.jpg", label: "Park — walking path"       },
+  { src: "/photos/PLACEHOLDER_22.jpg", label: "Neighborhood streetscape"  },
+
+  // ── Add more photos here as needed ────────────────────────────────────────
+  // { src: "/photos/IMG_XXXX.jpg", label: "Your label here" },
 ];
 
+// ─────────────────────────────────────────────────────────────────────────────
+//  COMPONENT
+// ─────────────────────────────────────────────────────────────────────────────
 export default function PhotoGallery() {
-  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(null); // null = closed
+  const total = PHOTOS.length;
 
-  const openLightbox = (i) => setLightboxIndex(i);
-  const closeLightbox = () => setLightboxIndex(null);
+  const openLightbox  = (idx) => setLightboxIndex(idx);
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
   const prev = useCallback(() =>
-    setLightboxIndex((i) => (i - 1 + PHOTOS.length) % PHOTOS.length), []);
+    setLightboxIndex((i) => (i - 1 + total) % total), [total]);
+
   const next = useCallback(() =>
-    setLightboxIndex((i) => (i + 1) % PHOTOS.length), []);
+    setLightboxIndex((i) => (i + 1) % total), [total]);
 
   // Keyboard navigation
   useEffect(() => {
     if (lightboxIndex === null) return;
-    const handler = (e) => {
+    const onKey = (e) => {
       if (e.key === "ArrowLeft")  prev();
       if (e.key === "ArrowRight") next();
       if (e.key === "Escape")     closeLightbox();
     };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [lightboxIndex, prev, next]);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxIndex, prev, next, closeLightbox]);
 
   // Lock body scroll when lightbox is open
   useEffect(() => {
@@ -65,108 +101,126 @@ export default function PhotoGallery() {
 
   return (
     <>
-      {/* ── GRID ──────────────────────────────────────────────────────────── */}
+      {/* ── GRID ────────────────────────────────────────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {PHOTOS.map((photo, i) => (
+        {PHOTOS.map((photo, idx) => (
           <button
-            key={i}
-            onClick={() => openLightbox(i)}
-            className="relative aspect-square bg-gradient-to-br from-[#243259] to-[#1a2744] rounded-lg overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#c9973a] focus:ring-offset-2"
-            aria-label={`View photo: ${photo.label}`}
+            key={idx}
+            onClick={() => openLightbox(idx)}
+            className="group relative aspect-square overflow-hidden rounded-xl bg-[#1a2744]/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9973a]"
+            aria-label={`Open photo: ${photo.label}`}
           >
-            {/* Photo */}
+            {/* Thumbnail image */}
             <img
               src={photo.src}
               alt={photo.label}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              onError={(e) => { e.currentTarget.style.display = "none"; }}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={(e) => {
+                // Graceful fallback if photo not yet uploaded
+                e.currentTarget.style.display = "none";
+                e.currentTarget.nextSibling.style.display = "flex";
+              }}
             />
 
-            {/* Fallback placeholder (shown when image hasn't been uploaded yet) */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <svg className="opacity-15 mb-1" width={28} height={28} fill="none" stroke="white" strokeWidth={1} viewBox="0 0 24 24">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
+            {/* Placeholder shown when image hasn't been uploaded yet */}
+            <div
+              className="absolute inset-0 flex-col items-center justify-center bg-[#1a2744]/[0.06] border border-[#1a2744]/10 rounded-xl"
+              style={{ display: "none" }}
+            >
+              <svg className="w-8 h-8 opacity-20 mb-2" fill="none" stroke="#1a2744" strokeWidth={1} viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
               </svg>
+              <span className="text-[10px] text-[#1a2744]/30 font-medium tracking-wide text-center px-2 leading-snug">
+                {photo.label}
+              </span>
             </div>
 
-            {/* Hover label overlay */}
-            <div className="absolute inset-0 bg-[#1a2744]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end p-3">
-              <span className="text-[10px] text-white tracking-wide leading-tight">{photo.label}</span>
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-[#1a2744]/0 group-hover:bg-[#1a2744]/30 transition-all duration-300 rounded-xl flex items-end">
+              <div className="w-full px-3 pb-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                <span className="text-[11px] font-medium text-white tracking-wide leading-snug line-clamp-1">
+                  {photo.label}
+                </span>
+              </div>
             </div>
 
-            {/* Photo counter badge */}
-            <div className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-[9px] text-white/70 font-medium px-1.5 py-0.5 rounded tracking-wide">
-              {i + 1}/{PHOTOS.length}
+            {/* Counter badge */}
+            <div className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-white text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">
+              {idx + 1}/{total}
             </div>
           </button>
         ))}
       </div>
 
-      {/* ── LIGHTBOX ──────────────────────────────────────────────────────── */}
+      {/* ── LIGHTBOX ────────────────────────────────────────────────────── */}
       {lightboxIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
+          className="fixed inset-0 z-[9999] bg-black/92 backdrop-blur-md flex items-center justify-center"
           onClick={closeLightbox}
         >
           {/* Close button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-5 right-5 text-white/60 hover:text-white transition-colors z-10 p-2"
+            className="absolute top-5 right-5 text-white/70 hover:text-white w-10 h-10 flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.16] transition-all z-10"
             aria-label="Close lightbox"
           >
-            <svg width={28} height={28} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-              <path d="M18 6L6 18M6 6l12 12"/>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-
-          {/* Counter */}
-          <div className="absolute top-5 left-1/2 -translate-x-1/2 text-white/50 text-sm tracking-widest font-light">
-            {lightboxIndex + 1} / {PHOTOS.length}
-          </div>
 
           {/* Prev arrow */}
           <button
             onClick={(e) => { e.stopPropagation(); prev(); }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all z-10"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white w-12 h-12 flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.16] transition-all z-10"
             aria-label="Previous photo"
           >
-            <svg width={20} height={20} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path d="M15 18l-6-6 6-6"/>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          {/* Next arrow */}
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white w-12 h-12 flex items-center justify-center rounded-full bg-white/[0.08] hover:bg-white/[0.16] transition-all z-10"
+            aria-label="Next photo"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <polyline points="9 18 15 12 9 6" />
             </svg>
           </button>
 
           {/* Image */}
           <div
-            className="relative max-w-5xl max-h-[85vh] w-full mx-16 flex items-center justify-center"
+            className="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center gap-4"
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              key={lightboxIndex}
               src={PHOTOS[lightboxIndex].src}
               alt={PHOTOS[lightboxIndex].label}
-              className="max-w-full max-h-[78vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
-              onError={(e) => { e.currentTarget.style.display = "none"; }}
+              className="max-w-full max-h-[75vh] object-contain rounded-xl shadow-2xl"
             />
-          </div>
 
-          {/* Caption */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center px-8">
-            <p className="text-white/80 text-sm tracking-wide">{PHOTOS[lightboxIndex].label}</p>
-            <p className="text-white/30 text-[11px] mt-1.5 tracking-widest">← → to navigate &nbsp;·&nbsp; ESC to close</p>
-          </div>
+            {/* Caption + counter */}
+            <div className="flex items-center gap-4">
+              <span className="text-white/50 text-[12px] font-medium tracking-widest uppercase">
+                {lightboxIndex + 1} / {total}
+              </span>
+              <span className="text-white/20 text-[12px]">·</span>
+              <span className="text-white/80 text-[13px] font-light tracking-wide">
+                {PHOTOS[lightboxIndex].label}
+              </span>
+            </div>
 
-          {/* Next arrow */}
-          <button
-            onClick={(e) => { e.stopPropagation(); next(); }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all z-10"
-            aria-label="Next photo"
-          >
-            <svg width={20} height={20} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path d="M9 18l6-6-6-6"/>
-            </svg>
-          </button>
+            {/* Keyboard hint */}
+            <p className="text-white/25 text-[11px] tracking-widest uppercase">
+              ← → to browse · ESC to close
+            </p>
+          </div>
         </div>
       )}
     </>
