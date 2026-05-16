@@ -293,10 +293,10 @@ export default function StonebridgePage() {
                 A home that comes with its own <em className="text-[#c9973a]">park.</em>
               </h2>
               <div className="space-y-5">
-                <p className="drop-cap text-[17px] text-[#1a2744] leading-[1.75]">icture your morning routine: coffee in hand, you open your front door, and instead of staring at someone else&apos;s bumper, you step directly into a beautiful community park. Not &quot;nearby.&quot; Not &quot;a short drive.&quot; Literally the park is right there, because someone named this subdivision the Parkes at Stonebridge — yes, with an e — and they had the audacity to make it accurate.</p>
+                <p className="drop-cap text-[17px] text-[#1a2744] leading-[1.75]">Picture your morning routine: coffee in hand, you open your front door, and instead of staring at someone else&apos;s bumper, you step directly into a beautiful community park. Not &quot;nearby.&quot; Not &quot;a short drive.&quot; Literally the park is right there, because someone named this subdivision the Parkes at Stonebridge — yes, with an e — and they had the audacity to make it accurate.</p>
                 <p className="text-[17px] text-[#1a2744] leading-[1.75]">Built in 2019, this 1,549 sq ft townhome with only one owner and this is your opportunity to change that! Hardiboard siding, forced air with central A/C, and well maintained, just for you! It&apos;s the real estate equivalent of buying a certified pre-owned vehicle — except the vehicle is a house, and the park is free.</p>
                 <p className="text-[17px] text-[#1a2744] leading-[1.75]">Three bedrooms, three bathrooms, and a 2-car garage make this place genuinely livable. But here&apos;s what the MLS doesn&apos;t tell you: at the top of the stairs, there&apos;s a placed for a desk to create your own study — that will make you feel like you finally have your life together. Home office? Creative studio? Dedicated &quot;do not disturb&quot; zone? The answer is yes, and also yes, and also yes.</p>
-                <p className="text-[17px] text-[#1a2744] leading-[1.75]">Eagle Crest Elementary (B+), Altona Middle (A-), and Silver Creek High (A) form your school pipeline. The Diagonal makes Boulder a 15-minute conversation. And Longmont&apos;s Dry Creek Trail system is essentially your backyard. The question isn&apos;t whether this is a good fit. The question is how fast you want to move on it.</p>
+                <p className="text-[17px] text-[#1a2744] leading-[1.75]">Eagle Crest Elementary (B+), Altona Middle (A-), and Silver Creek High (A) form your school pipeline. The Diagonal makes Boulder a 15-minute commute. And Longmont&apos;s Dry Creek Trail system is essentially your backyard. The question isn&apos;t whether this is a good fit. The question is how fast you want to move on it.</p>
               </div>
               <ul className="mt-8 divide-y divide-[#1a2744]/10">
                 {[
@@ -321,7 +321,7 @@ export default function StonebridgePage() {
                 <div className="divide-y divide-white/[0.08]">
                   {[
                     { label: "Property type", value: "Townhouse (Residential)" },
-                    { label: "Year built", value: "2019 — basically new" },
+                    { label: "Year built", value: "2019" },
                     { label: "Living area", value: "1,549 sq ft" },
                     { label: "Lot size", value: "2,178 sq ft" },
                     { label: "Garage", value: "2 spaces" },
