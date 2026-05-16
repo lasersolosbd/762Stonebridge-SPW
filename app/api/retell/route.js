@@ -15,7 +15,7 @@ export async function POST(request) {
     }
 
     // 2. Select the correct Agent ID based on user toggle selection
-    const voiceAgentId = process.env.NEXT_PUBLIC_RETELL_AGENT_ID;
+    const voiceAgentId = "agent_3132771d0f60fcd4dd28b7da7f";
     const textAgentId = "agent_a52367df32554a850bd34e8a44";
     const selectedAgentId = mode === "text" ? textAgentId : voiceAgentId;
 
