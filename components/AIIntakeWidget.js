@@ -1,9 +1,87 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { RetellWebClient } from "retell-client-js-sdk";
+
+// Initialize the Retell client
+const retellWebClient = new RetellWebClient();
 
 export default function AIIntakeWidget() {
   const [mode, setMode] = useState("voice");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isCalling, setIsCalling] = useState(false);
+  const [statusText, setStatusText] = useState("Online");
+
+  // Listen for call events
+  useEffect(() => {
+    retellWebClient.on("call_started", () => {
+      setIsCalling(true);
+      setStatusText("Call Connected");
+    });
+
+    retellWebClient.on("call_ended", () => {
+      setIsCalling(false);
+      setStatusText("Online");
+    });
+
+    retellWebClient.on("error", (error) => {
+      console.error("Retell error:", error);
+      setIsCalling(false);
+      setStatusText("Error. Try again.");
+    });
+
+    // Cleanup listeners
+    return () => {
+      retellWebClient.off("call_started");
+      retellWebClient.off("call_ended");
+      retellWebClient.off("error");
+    };
+  }, []);
+
+  const handleStartCall = async () => {
+    if (!name || !phone) {
+      alert("Please enter your name and phone number first.");
+      return;
+    }
+
+    setStatusText("Connecting...");
+
+    try {
+      // 1. Send data to the GoHighLevel Webhook silently
+      await fetch(process.env.NEXT_PUBLIC_GHL_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone }),
+      });
+
+      // 2. Fetch the secure Retell token from our own backend
+      const response = await fetch("/api/retell", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!data.accessToken) {
+        throw new Error("Failed to get access token");
+      }
+
+      // 3. Start the microphone call!
+      await retellWebClient.startCall({
+        accessToken: data.accessToken,
+      });
+
+    } catch (error) {
+      console.error("Failed to connect:", error);
+      setStatusText("Connection Failed");
+      setIsCalling(false);
+    }
+  };
+
+  const handleEndCall = () => {
+    retellWebClient.stopCall();
+  };
 
   return (
     <div className="bg-[#1a2744] rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.2)]">
@@ -32,8 +110,8 @@ export default function AIIntakeWidget() {
           </button>
         </div>
         <div className="flex items-center gap-2 text-xs text-emerald-400 font-medium">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-dot" />
-          Online
+          <span className={`w-2 h-2 rounded-full bg-emerald-400 ${isCalling ? "animate-pulse" : "animate-pulse-dot"}`} />
+          {statusText}
         </div>
       </div>
 
@@ -61,8 +139,11 @@ export default function AIIntakeWidget() {
           </label>
           <input
             type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            disabled={isCalling}
             placeholder="First and last name"
-            className="w-full bg-white/[0.07] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-white placeholder-[#8a9bbf]/50 outline-none focus:border-[#c9973a] transition-colors duration-200"
+            className="w-full bg-white/[0.07] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-white placeholder-[#8a9bbf]/50 outline-none focus:border-[#c9973a] transition-colors duration-200 disabled:opacity-50"
           />
         </div>
         <div className="mb-4">
@@ -71,14 +152,29 @@ export default function AIIntakeWidget() {
           </label>
           <input
             type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            disabled={isCalling}
             placeholder="+1 (000) 000-0000"
-            className="w-full bg-white/[0.07] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-white placeholder-[#8a9bbf]/50 outline-none focus:border-[#c9973a] transition-colors duration-200"
+            className="w-full bg-white/[0.07] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-white placeholder-[#8a9bbf]/50 outline-none focus:border-[#c9973a] transition-colors duration-200 disabled:opacity-50"
           />
         </div>
 
-        <button className="w-full mt-2 bg-[#c9973a] hover:bg-[#ddb564] text-white font-bold text-sm py-4 rounded-lg tracking-widest uppercase transition-colors duration-200">
-          {mode === "voice" ? "Start Talking to the Agent →" : "Start Chatting with the Agent →"}
-        </button>
+        {isCalling ? (
+          <button 
+            onClick={handleEndCall}
+            className="w-full mt-2 bg-red-600 hover:bg-red-700 text-white font-bold text-sm py-4 rounded-lg tracking-widest uppercase transition-colors duration-200"
+          >
+            End Call
+          </button>
+        ) : (
+          <button 
+            onClick={handleStartCall}
+            className="w-full mt-2 bg-[#c9973a] hover:bg-[#ddb564] text-white font-bold text-sm py-4 rounded-lg tracking-widest uppercase transition-colors duration-200"
+          >
+            {mode === "voice" ? "Start Talking to the Agent →" : "Start Chatting with the Agent →"}
+          </button>
+        )}
 
         <p className="text-center text-[10px] text-[#8a9bbf]/50 mt-3 leading-relaxed">
           By entering your phone number, you consent to receive calls and texts about this
