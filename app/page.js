@@ -227,7 +227,7 @@ export default function StonebridgePage() {
           </h1>
           <p className="text-lg font-light text-[#8a9bbf] mb-7 tracking-wide">Longmont, Colorado 80503</p>
           <p className="text-[#e8e0d0] leading-relaxed mb-11 max-w-[420px]" style={{ fontSize: "clamp(14px,1.5vw,17px)" }}>
-            A luxury townhome where your front door opens directly into one of Longmont&apos;s most beautiful community parks. No, really — it&apos;s literally called the Parkes. Because of the park.
+            A luxury townhome where your front door opens directly into one of Longmont&apos;s most beautiful subdivision community parks. No, really — it&apos;s literally called the Parkes. Because of the park.
           </p>
           
           {/* RESPONSIVE LAYOUT ACTION BUTTONS */}
