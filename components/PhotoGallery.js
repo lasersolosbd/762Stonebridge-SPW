@@ -22,24 +22,23 @@ import { useState, useEffect, useCallback } from "react";
 // ─────────────────────────────────────────────────────────────────────────────
 const PHOTOS = [
   // ── Exterior ─────────────────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_01.jpg", label: "Front exterior"            },
-  { src: "/photos/PLACEHOLDER_02.jpg", label: "Rear / patio"              },
-  { src: "/photos/PLACEHOLDER_03.jpg", label: "Park view from front door" },
+  { src: "/photos/02-MG_6804.jpg", label: "Front exterior"            },
+  { src: "/photos/27-MG_6794.jpg", label: "Front / patio"              },
+  { src: "/photos/28-MG_6809.jpg", label: "Park view from front door" },
 
   // ── Main Living ───────────────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_04.jpg", label: "Living room"               },
-  { src: "/photos/PLACEHOLDER_05.jpg", label: "Living room — alternate"   },
-  { src: "/photos/PLACEHOLDER_06.jpg", label: "Dining area"               },
+  { src: "/photos/06-MG_6609.jpg", label: "Living room"               },
+  { src: "/photos/03-MG_6624.jpg", label: "Living room"               },
+  { src: "/photos/04-MG_6679.jpg", label: "Fireplace"               },
 
   // ── Kitchen ───────────────────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_07.jpg", label: "Kitchen"                   },
-  { src: "/photos/PLACEHOLDER_08.jpg", label: "Kitchen — counters"        },
-  { src: "/photos/PLACEHOLDER_09.jpg", label: "Kitchen — appliances"      },
+  { src: "/photos/12-MG_6654.jpg", label: "Kitchen"                   },
+  { src: "/photos/11-MG_6644.jpg", label: "Kitchen"        },
 
   // ── Primary Bedroom & Bath ────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_10.jpg", label: "Primary bedroom"           },
-  { src: "/photos/PLACEHOLDER_11.jpg", label: "Primary bedroom — detail"  },
-  { src: "/photos/PLACEHOLDER_12.jpg", label: "Primary bathroom"          },
+  { src: "/photos/16-MG_6704.jpg", label: "Primary bedroom"           },
+  { src: "/photos/17-MG_6714.jpg", label: "Primary bedroom"           },
+  { src: "/photos/20-MG_6734.jpg", label: "Primary bathroom"          },
 
   // ── Secondary Bedrooms ────────────────────────────────────────────────────
   { src: "/photos/PLACEHOLDER_13.jpg", label: "Bedroom 2"                 },
