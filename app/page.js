@@ -321,7 +321,7 @@ export default function StonebridgePage() {
                 <div className="divide-y divide-white/[0.08]">
                   {[
                     { label: "Property type", value: "Townhouse (Residential)" },
-                    { label: "Year built", value: "2019" },
+                    { label: "Year built", value: "2019 — basically new" },
                     { label: "Living area", value: "1,549 sq ft" },
                     { label: "Lot size", value: "2,178 sq ft" },
                     { label: "Garage", value: "2 spaces" },
@@ -339,6 +339,9 @@ export default function StonebridgePage() {
                   See Open House Dates →
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ══ GALLERY ═══════════════════════════════════════════════════════════ */}
