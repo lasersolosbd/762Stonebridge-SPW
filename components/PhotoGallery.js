@@ -5,70 +5,61 @@ import { useState, useEffect, useCallback } from "react";
 // ─────────────────────────────────────────────────────────────────────────────
 //  PHOTO CONFIG
 //  ─────────────────────────────────────────────────────────────────────────────
-//  When your photos arrive, fill this array in the order you want them
-//  displayed. Use the exact filenames — no renaming needed.
+//  Photos live directly in your /public/ folder in the repo (no subfolder).
+//  src paths start with "/" followed by the exact filename.
 //
-//  · src   → path inside /public/  (e.g. "/photos/IMG_4821.jpg")
-//  · label → caption shown in the lightbox (keep it short)
-//
-//  To add or remove photos, just add/remove objects from this array.
-//  The gallery will automatically adjust the grid and counter.
-//
-//  EXAMPLE:
-//    { src: "/photos/IMG_4821.jpg",  label: "Front exterior"       },
-//    { src: "/photos/DSC_0042.jpg",  label: "Living room"          },
-//    { src: "/photos/IMG_4830.jpg",  label: "Kitchen"              },
-//
+//  To add more photos: add an object to the array below.
+//  To remove a placeholder: delete that line once the real photo is uploaded.
 // ─────────────────────────────────────────────────────────────────────────────
 const PHOTOS = [
   // ── Exterior ─────────────────────────────────────────────────────────────
-  { src: "/photos/02-MG_6804.jpg", label: "Front exterior"            },
-  { src: "/photos/27-MG_6794.jpg", label: "Front / patio"              },
-  { src: "/photos/28-MG_6809.jpg", label: "Park view from front door" },
+  { src: "/02-MG_6804.jpg", label: "Front exterior"            },
+  { src: "/27-MG_6794.jpg", label: "Front / patio"             },
+  { src: "/28-MG_6809.jpg", label: "Park view from front door" },
 
   // ── Main Living ───────────────────────────────────────────────────────────
-  { src: "/photos/06-MG_6609.jpg", label: "Living room"               },
-  { src: "/photos/03-MG_6624.jpg", label: "Living room"               },
-  { src: "/photos/04-MG_6679.jpg", label: "Fireplace"               },
+  { src: "/06-MG_6609.jpg", label: "Living room"               },
+  { src: "/03-MG_6624.jpg", label: "Living room"               },
+  { src: "/04-MG_6679.jpg", label: "Fireplace"                 },
 
   // ── Kitchen ───────────────────────────────────────────────────────────────
-  { src: "/photos/12-MG_6654.jpg", label: "Kitchen"                   },
-  { src: "/photos/11-MG_6644.jpg", label: "Kitchen"        },
+  { src: "/12-MG_6654.jpg", label: "Kitchen"                   },
+  { src: "/11-MG_6644.jpg", label: "Kitchen"                   },
 
   // ── Primary Bedroom & Bath ────────────────────────────────────────────────
-  { src: "/photos/16-MG_6704.jpg", label: "Primary bedroom"           },
-  { src: "/photos/17-MG_6714.jpg", label: "Primary bedroom"           },
-  { src: "/photos/20-MG_6734.jpg", label: "Primary bathroom"          },
+  { src: "/16-MG_6704.jpg", label: "Primary bedroom"           },
+  { src: "/17-MG_6714.jpg", label: "Primary bedroom"           },
+  { src: "/20-MG_6734.jpg", label: "Primary bathroom"          },
 
   // ── Secondary Bedrooms ────────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_13.jpg", label: "Bedroom 2"                 },
-  { src: "/photos/PLACEHOLDER_14.jpg", label: "Bedroom 3"                 },
+  { src: "/PLACEHOLDER_13.jpg", label: "Bedroom 2"                },
+  { src: "/PLACEHOLDER_14.jpg", label: "Bedroom 3"                },
 
   // ── Bathrooms ─────────────────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_15.jpg", label: "Full bathroom"             },
-  { src: "/photos/PLACEHOLDER_16.jpg", label: "Half bath"                 },
+  { src: "/PLACEHOLDER_15.jpg", label: "Full bathroom"            },
+  { src: "/PLACEHOLDER_16.jpg", label: "Half bath"                },
 
   // ── Study & Bonus ─────────────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_17.jpg", label: "Study at top of stairs"    },
-  { src: "/photos/PLACEHOLDER_18.jpg", label: "Study — alternate angle"   },
+  { src: "/PLACEHOLDER_17.jpg", label: "Study at top of stairs"   },
+  { src: "/PLACEHOLDER_18.jpg", label: "Study — alternate angle"  },
 
   // ── Garage & Storage ──────────────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_19.jpg", label: "2-car garage"              },
+  { src: "/PLACEHOLDER_19.jpg", label: "2-car garage"             },
 
   // ── Community & Neighborhood ──────────────────────────────────────────────
-  { src: "/photos/PLACEHOLDER_20.jpg", label: "Community park"            },
-  { src: "/photos/PLACEHOLDER_21.jpg", label: "Park — walking path"       },
-  { src: "/photos/PLACEHOLDER_22.jpg", label: "Neighborhood streetscape"  },
+  { src: "/PLACEHOLDER_20.jpg", label: "Community park"           },
+  { src: "/PLACEHOLDER_21.jpg", label: "Park — walking path"      },
+  { src: "/PLACEHOLDER_22.jpg", label: "Neighborhood streetscape" },
 
   // ── Add more photos here as needed ────────────────────────────────────────
-  // { src: "/photos/IMG_XXXX.jpg", label: "Your label here" },
+  // { src: "/IMG_XXXX.jpg", label: "Your label here" },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  COMPONENT
 // ─────────────────────────────────────────────────────────────────────────────
 export default function PhotoGallery() {
-  const [lightboxIndex, setLightboxIndex] = useState(null); // null = closed
+  const [lightboxIndex, setLightboxIndex] = useState(null);
   const total = PHOTOS.length;
 
   const openLightbox  = (idx) => setLightboxIndex(idx);
@@ -115,7 +106,6 @@ export default function PhotoGallery() {
               alt={photo.label}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               onError={(e) => {
-                // Graceful fallback if photo not yet uploaded
                 e.currentTarget.style.display = "none";
                 e.currentTarget.nextSibling.style.display = "flex";
               }}
