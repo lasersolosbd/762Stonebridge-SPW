@@ -10,6 +10,28 @@ export const metadata = {
   },
   description:
     "762 Stonebridge Drive, Longmont, CO 80503 — 3 bed, 3 bath, 1,549 sq ft townhome in Parkes at Stonebridge. Listed at $460,000. Built 2019. 2-car garage. Served by St. Vrain Valley schools.",
+  openGraph: {
+    title: "762 Stonebridge Drive | Solomon Home Services",
+    description: "3 bed, 3 bath, 1,549 sq ft luxury townhome in Parkes at Stonebridge. Listed at $460,000.",
+    url: "https://762stonebridge.solomonhomeservices.com",
+    siteName: "Solomon Home Services",
+    images: [
+      {
+        url: "/02-MG_6804.jpg", // Automatically pulls from your public folder
+        width: 1200,
+        height: 630,
+        alt: "762 Stonebridge Drive Exterior Property View",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "762 Stonebridge Drive | Solomon Home Services",
+    description: "3 bed, 3 bath luxury townhome in Parkes at Stonebridge. Listed at $460,000.",
+    images: ["/02-MG_6804.jpg"],
+  },
 };
 
 export default function RootLayout({ children }) {
