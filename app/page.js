@@ -104,10 +104,10 @@ const jsonLd = {
 // ─── OPEN HOUSE DATA ──────────────────────────────────────────────────────────
 //
 //  ╔══════════════════════════════════════════════════════════════════════════╗
-//  ║  TO UPDATE DATES: edit the objects in this array.                      ║
-//  ║  · Change month / day / dow / time / subline as needed.               ║
-//  ║  · badgeStyle: "gold" = orange pill  |  "navy" = dark pill            ║
-//  ║  · cta: null = no button. When AI agent is ready, swap the href.      ║
+//  ║  TO UPDATE DATES: edit the objects in this array.                        ║
+//  ║  · Change month / day / dow / time / subline as needed.                  ║
+//  ║  · badgeStyle: "gold" = orange pill  |  "navy" = dark pill               ║
+//  ║  · cta: null = no button. When AI agent is ready, swap the href.         ║
 //  ╚══════════════════════════════════════════════════════════════════════════╝
 //
 const openHouses = [
@@ -249,12 +249,15 @@ export default function StonebridgePage() {
             <a href="#openhouse" className="text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap">Open House</a>
           </div>
         </div>
+        
+        {/* THIS IS THE UPDATED SECTION WITH THE IMAGE */}
         <div className="relative bg-[#243259] min-h-[360px] lg:min-h-0">
-          <div className="absolute inset-0 flex flex-col items-center justify-center border-l border-white/[0.08]">
-            <svg className="w-14 h-14 opacity-20 mb-4" fill="none" stroke="white" strokeWidth={1} viewBox="0 0 24 24">
-              <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
-            </svg>
-            <p className="text-[13px] text-[#8a9bbf] tracking-wide text-center max-w-[200px] leading-relaxed">Exterior photo — replace with professional photography</p>
+          <div className="absolute inset-0 border-l border-white/[0.08]">
+            <img 
+              src="/02-MG_6804.jpg" 
+              alt="762 Stonebridge Drive Exterior" 
+              className="w-full h-full object-cover" 
+            />
           </div>
           <div className="absolute top-8 left-8">
             <span className="text-[11px] font-semibold text-[#c9973a] tracking-[0.12em] uppercase bg-[#c9973a]/15 border border-[#c9973a] px-4 py-1.5 rounded">Active Listing</span>
