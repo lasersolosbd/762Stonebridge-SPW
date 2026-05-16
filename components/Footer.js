@@ -7,8 +7,16 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#0f172a] text-stone-400 border-t border-white/[0.05] relative z-10">
+      
+      {/* Top Disclaimer Header - Absolute Top Center of Footer */}
+      <div className="w-full border-b border-white/10 py-6 px-6 bg-white/[0.02]">
+        <p className="text-center text-sm text-[#c9a84c] font-black uppercase tracking-wider max-w-4xl mx-auto">
+          This is not an attempt to solicit an already listed house.
+        </p>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-        {/* Brand Column with Co-Branding Rules */}
+        {/* Column 1: Brand & Brokerage Compliance */}
         <div className="lg:col-span-2">
           {/* CO-BRANDING LOGOS */}
           <div className="flex items-center gap-6 mb-6">
@@ -61,7 +69,7 @@ export default function Footer() {
             <li><a href="#" className="text-sm text-stone-400 hover:text-[#c9a84c] transition-colors duration-200">Top of Page</a></li>
             <li><a href="https://www.solomonhomeservices.com/#strategy" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c] transition-colors duration-200">Marketing Strategy</a></li>
             <li><a href="https://www.solomonhomeservices.com/#about" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c] transition-colors duration-200">About Mark</a></li>
-            <li><a href="https://www.solomonhomeservices.com/#contact" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c] transition-colors duration-200">Free Home Vacation</a></li>
+            <li><a href="https://www.solomonhomeservices.com/#contact" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c] transition-colors duration-200">Free Home Valuation</a></li>
           </ul>
         </div>
 
@@ -71,8 +79,8 @@ export default function Footer() {
             Legal
           </h4>
           <ul className="flex flex-col gap-3">
-            <li><a href="https://www.solomonhomeservices.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c]">Privacy Policy</a></li>
-            <li><a href="https://www.solomonhomeservices.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c]">Terms of Service</a></li>
+            <li><a href="https://www.solomonhomeservices.com/privacy" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c] transition-colors">Privacy Policy</a></li>
+            <li><a href="https://www.solomonhomeservices.com/terms" target="_blank" rel="noopener noreferrer" className="text-sm text-stone-400 hover:text-[#c9a84c] transition-colors">Terms of Service</a></li>
           </ul>
         </div>
       </div>
@@ -81,10 +89,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="bg-white/5 border border-[#c9a84c]/20 rounded-lg px-5 py-5 mb-8 space-y-3">
-            <p className="text-center text-sm text-[#c9a84c] font-black uppercase tracking-wider">
-              This is not an attempt to solicit an already listed house.
-            </p>
-            <p className="text-center text-xs text-stone-400 leading-relaxed pt-1">
+            <p className="text-center text-xs text-stone-400 leading-relaxed">
               <span className="text-[#c9a84c] font-semibold">Brokerage Disclosure:</span>{" "}
               Mark Solomon is a licensed real estate broker (Colorado license #100084304) operating under{" "}
               <strong className="text-stone-300">Real Broker, LLC</strong>. 
