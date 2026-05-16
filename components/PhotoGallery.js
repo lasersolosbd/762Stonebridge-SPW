@@ -32,24 +32,22 @@ const PHOTOS = [
   { src: "/20-MG_6734.jpg", label: "Primary bathroom"          },
 
   // ── Secondary Bedrooms ────────────────────────────────────────────────────
-  { src: "/PLACEHOLDER_13.jpg", label: "Bedroom 2"                },
-  { src: "/PLACEHOLDER_14.jpg", label: "Bedroom 3"                },
+  { src: "/22-MG_6764.jpg", label: "Bedroom 2"                },
+  { src: "/25-MG_6744.jpg", label: "Bedroom 3"                },
 
   // ── Bathrooms ─────────────────────────────────────────────────────────────
-  { src: "/PLACEHOLDER_15.jpg", label: "Full bathroom"            },
-  { src: "/PLACEHOLDER_16.jpg", label: "Half bath"                },
+  { src: "/24-MG_6779.jpg", label: "Full bathroom"            },
 
   // ── Study & Bonus ─────────────────────────────────────────────────────────
-  { src: "/PLACEHOLDER_17.jpg", label: "Study at top of stairs"   },
-  { src: "/PLACEHOLDER_18.jpg", label: "Study — alternate angle"  },
+  { src: "/15-MG_6789.jpg", label: "Study at top of stairs"   },
 
   // ── Garage & Storage ──────────────────────────────────────────────────────
-  { src: "/PLACEHOLDER_19.jpg", label: "2-car garage"             },
+  { src: "/30-MG_6869.jpg", label: "2-car garage"             },
 
   // ── Community & Neighborhood ──────────────────────────────────────────────
-  { src: "/PLACEHOLDER_20.jpg", label: "Community park"           },
-  { src: "/PLACEHOLDER_21.jpg", label: "Park — walking path"      },
-  { src: "/PLACEHOLDER_22.jpg", label: "Neighborhood streetscape" },
+  { src: "/32-MG_6829.jpg", label: "Community park"           },
+  { src: "/35-MG_6819.jpg", label: "Park — walking path"      },
+  { src: "/31-MG_6859.jpg", label: "Community park" },
 
   // ── Add more photos here as needed ────────────────────────────────────────
   // { src: "/IMG_XXXX.jpg", label: "Your label here" },
