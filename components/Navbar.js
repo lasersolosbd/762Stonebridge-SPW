@@ -17,27 +17,12 @@ export default function Navbar() {
   const forceDarkNav = scrolled;
   const realBrokerLogoSrc = "/real-broker-logo-light.png";
 
-  const navLinks = [
-    { targetId: "hero", label: "Home" },
-    { targetId: "strategy", label: "Strategy" },
-    { targetId: "about", label: "About" },
-    { targetId: "contact", label: "Contact" },
-  ];
-
   const handleScrollToSection = (e, targetId) => {
     e.preventDefault();
     setIsOpen(false);
     
-    if (targetId === "hero") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-
-    // Attempt to find by ID or search sections by text content if ID is missing
     let element = document.getElementById(targetId);
-    
     if (!element) {
-      // Backup plan if Claude forgot the section IDs: look for section tags containing text
       const sections = document.querySelectorAll("section, div");
       for (let sec of sections) {
         if (sec.textContent && sec.textContent.toLowerCase().includes(targetId)) {
@@ -48,7 +33,7 @@ export default function Navbar() {
     }
 
     if (element) {
-      const offset = 80; // Offset for navbar height
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -59,10 +44,8 @@ export default function Navbar() {
         behavior: "smooth"
       });
     } else {
-      // Absolute fallback if section can't be computed dynamically
-      if (targetId === "strategy") window.scrollTo({ top: 1200, behavior: "smooth" });
-      if (targetId === "about") window.scrollTo({ top: 2200, behavior: "smooth" });
-      if (targetId === "contact") window.scrollTo({ top: 3200, behavior: "smooth" });
+      if (targetId === "strategy") window.scrollTo({ top: 1400, behavior: "smooth" });
+      if (targetId === "about") window.scrollTo({ top: 2400, behavior: "smooth" });
     }
   };
 
@@ -77,14 +60,14 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* BRANDING */}
         <div className="flex items-center gap-4">
-          <a href="#" onClick={(e) => handleScrollToSection(e, "hero")} className="flex items-center gap-2 group">
+          <a href="https://www.solomonhomeservices.com" className="flex items-center gap-2 group">
             <Mountain
               size={28}
               className="text-[#c9a84c] transition-transform duration-300 group-hover:scale-110"
               strokeWidth={1.5}
             />
             <div className="flex flex-col leading-none">
-              <span className="text-lg font-semibold tracking-wide text-white transition-colors duration-300">
+              <span className="text-lg font-semibold tracking-wide text-white">
                 Solomon
               </span>
               <span className="text-[#c9a84c] text-[10px] tracking-[0.2em] uppercase font-medium">
@@ -104,21 +87,28 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.targetId}
-              href={`#${link.targetId}`}
-              onClick={(e) => handleScrollToSection(e, link.targetId)}
-              className="text-sm font-medium tracking-widest uppercase transition-colors duration-200 relative group text-stone-200 hover:text-[#c9a84c]"
-            >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c9a84c] transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+          <a href="https://www.solomonhomeservices.com" className="text-sm font-medium tracking-widest uppercase text-stone-200 hover:text-[#c9a84c] transition-colors">
+            Home
+          </a>
           <a
-            href="#contact"
-            onClick={(e) => handleScrollToSection(e, "contact")}
-            className="ml-4 px-5 py-2.5 bg-[#c9a84c] hover:bg-[#b8965e] text-[#0f172a] text-sm font-semibold tracking-wider uppercase rounded transition-all duration-200 hover:shadow-lg hover:shadow-[#c9a84c]/25 hover:-translate-y-px"
+            href="#strategy"
+            onClick={(e) => handleScrollToSection(e, "strategy")}
+            className="text-sm font-medium tracking-widest uppercase text-stone-200 hover:text-[#c9a84c] transition-colors relative group"
+          >
+            Strategy
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c9a84c] transition-all duration-300 group-hover:w-full" />
+          </a>
+          <a
+            href="#about"
+            onClick={(e) => handleScrollToSection(e, "about")}
+            className="text-sm font-medium tracking-widest uppercase text-stone-200 hover:text-[#c9a84c] transition-colors relative group"
+          >
+            About Property
+            <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c9a84c] transition-all duration-300 group-hover:w-full" />
+          </a>
+          <a
+            href="https://www.solomonhomeservices.com/#contact"
+            className="ml-4 px-5 py-2.5 bg-[#c9a84c] hover:bg-[#b8965e] text-[#0f172a] text-sm font-semibold tracking-wider uppercase rounded transition-all duration-200"
           >
             Get Your House Value
           </a>
@@ -141,19 +131,25 @@ export default function Navbar() {
         }`}
       >
         <div className="bg-[#0f172a]/98 backdrop-blur-md border-t border-white/10 px-6 py-6 flex flex-col gap-5">
-          {navLinks.map((link) => (
-            <a
-              key={link.targetId}
-              href={`#${link.targetId}`}
-              onClick={(e) => handleScrollToSection(e, link.targetId)}
-              className="text-stone-200 hover:text-[#c9a84c] text-sm font-medium tracking-widest uppercase transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          <a href="https://www.solomonhomeservices.com" className="text-stone-200 hover:text-[#c9a84c] text-sm font-medium tracking-widest uppercase">
+            Home
+          </a>
           <a
-            href="#contact"
-            onClick={(e) => handleScrollToSection(e, "contact")}
+            href="#strategy"
+            onClick={(e) => handleScrollToSection(e, "strategy")}
+            className="text-stone-200 hover:text-[#c9a84c] text-sm font-medium tracking-widest uppercase"
+          >
+            Strategy
+          </a>
+          <a
+            href="#about"
+            onClick={(e) => handleScrollToSection(e, "about")}
+            className="text-stone-200 hover:text-[#c9a84c] text-sm font-medium tracking-widest uppercase"
+          >
+            About Property
+          </a>
+          <a
+            href="https://www.solomonhomeservices.com/#contact"
             className="mt-2 px-5 py-3 bg-[#c9a84c] text-[#0f172a] text-sm font-semibold tracking-wider uppercase rounded text-center"
           >
             Get Your House Value
