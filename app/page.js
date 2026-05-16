@@ -1,3 +1,10 @@
+I see exactly what is causing that. Because both the "Picture This" section and the "Photo Gallery" section use the same exact background color (bg-[#f5f0e8]), their individual top and bottom paddings are visually stacking on top of each other. They both had py-24 (padding on the y-axis), which created a massive 192-pixel gap between them!
+
+To tighten this up so it looks cohesive (like your second screenshot), I have changed the bottom padding of the description to pb-8 and the top padding of the gallery to pt-8. This reduces the gap significantly while maintaining a clean visual break.
+
+Here is the complete, updated file with both the new exterior image fix and the corrected section spacing:
+
+JavaScript
 import AIIntakeWidget from "@/components/AIIntakeWidget";
 import PhotoGallery from "@/components/PhotoGallery";
 
@@ -102,17 +109,8 @@ const jsonLd = {
 };
 
 // ─── OPEN HOUSE DATA ──────────────────────────────────────────────────────────
-//
-//  ╔══════════════════════════════════════════════════════════════════════════╗
-//  ║  TO UPDATE DATES: edit the objects in this array.                        ║
-//  ║  · Change month / day / dow / time / subline as needed.                  ║
-//  ║  · badgeStyle: "gold" = orange pill  |  "navy" = dark pill               ║
-//  ║  · cta: null = no button. When AI agent is ready, swap the href.         ║
-//  ╚══════════════════════════════════════════════════════════════════════════╝
-//
 const openHouses = [
   {
-    // ── Card 1 ────────────────────────────────────────────────────────────
     month: "May",
     day: 16,
     dow: "Sat",
@@ -126,7 +124,6 @@ const openHouses = [
     cta: null,
   },
   {
-    // ── Card 2 ────────────────────────────────────────────────────────────
     month: "May",
     day: 17,
     dow: "Sun",
@@ -139,9 +136,6 @@ const openHouses = [
     cta: null,
   },
   {
-    // ── Card 3 — Private Showing (no date, permanent call-to-book) ────────
-    // Update cta.href to AI agent URL when it goes live:
-    //   cta: { label: "Chat with the AI Agent", href: "https://your-agent-url" },
     month: null,
     day: null,
     dow: null,
@@ -242,7 +236,6 @@ export default function StonebridgePage() {
           <p className="text-[#e8e0d0] leading-relaxed mb-11 max-w-[420px]" style={{ fontSize: "clamp(14px,1.5vw,17px)" }}>
             A luxury townhome where your front door opens directly into one of Longmont&apos;s most beautiful community parks. No, really — it&apos;s literally called the Parkes. Because of the park.
           </p>
-          {/* ── Hero CTAs — three buttons, all on one row ── */}
           <div className="flex items-center gap-3 flex-nowrap">
             <a href="#contact" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px whitespace-nowrap">Schedule a Tour →</a>
             <a href="#description" className="text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap">See the Details</a>
@@ -250,7 +243,6 @@ export default function StonebridgePage() {
           </div>
         </div>
         
-        {/* THIS IS THE UPDATED SECTION WITH THE IMAGE */}
         <div className="relative bg-[#243259] min-h-[360px] lg:min-h-0">
           <div className="absolute inset-0 border-l border-white/[0.08]">
             <img 
@@ -284,7 +276,8 @@ export default function StonebridgePage() {
       </div>
 
       {/* ══ DESCRIPTION ═══════════════════════════════════════════════════════ */}
-      <section id="description" className="bg-[#f5f0e8] py-24">
+      {/* UPDATE: Adjusted bottom padding (pb-8) to close the gap */}
+      <section id="description" className="bg-[#f5f0e8] pt-24 pb-8">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
             <div>
@@ -337,7 +330,6 @@ export default function StonebridgePage() {
                     </div>
                   ))}
                 </div>
-                {/* Sticky card CTA now points to #openhouse since contact moved lower */}
                 <a href="#openhouse" className="mt-8 block text-center bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-colors duration-200">
                   See Open House Dates →
                 </a>
@@ -348,7 +340,8 @@ export default function StonebridgePage() {
       </section>
 
       {/* ══ GALLERY ═══════════════════════════════════════════════════════════ */}
-      <section id="gallery" className="bg-[#f5f0e8] py-24">
+      {/* UPDATE: Adjusted top padding (pt-8) to close the gap */}
+      <section id="gallery" className="bg-[#f5f0e8] pt-8 pb-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-6 h-px bg-[#c9973a]" />
@@ -363,7 +356,6 @@ export default function StonebridgePage() {
 
           <PhotoGallery />
 
-          {/* Gallery CTAs — both point down the page */}
           <div className="mt-14 flex flex-col sm:flex-row items-center gap-5 justify-center">
             <a
               href="#openhouse"
