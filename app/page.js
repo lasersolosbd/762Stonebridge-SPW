@@ -215,7 +215,7 @@ export default function StonebridgePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
-      <section className="bg-[#1a2744] min-h-[88vh] grid grid-cols-1 lg:grid-cols-2 relative overflow-hidden pt-16">
+      <section id="hero" className="bg-[#1a2744] min-h-[88vh] grid grid-cols-1 lg:grid-cols-2 relative overflow-hidden pt-16">
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 80% 50%, rgba(201,151,58,0.06) 0%, transparent 60%)" }} />
         <div className="flex flex-col justify-center px-10 lg:px-16 py-20 z-10">
           <div className="flex items-center gap-3 mb-7">
@@ -229,10 +229,12 @@ export default function StonebridgePage() {
           <p className="text-[#e8e0d0] leading-relaxed mb-11 max-w-[420px]" style={{ fontSize: "clamp(14px,1.5vw,17px)" }}>
             A luxury townhome where your front door opens directly into one of Longmont&apos;s most beautiful community parks. No, really — it&apos;s literally called the Parkes. Because of the park.
           </p>
-          <div className="flex items-center gap-3 flex-nowrap">
-            <a href="#contact" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px whitespace-nowrap">Schedule a Tour →</a>
-            <a href="#description" className="text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap">See the Details</a>
-            <a href="#openhouse" className="text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap">Open House</a>
+          
+          {/* RESPONSIVE LAYOUT ACTION BUTTONS */}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 w-full sm:w-auto mt-8">
+            <a href="#contact" className="inline-flex justify-center items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px whitespace-nowrap w-full sm:w-auto">Schedule a Tour →</a>
+            <a href="#description" className="inline-flex justify-center text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap w-full sm:w-auto">See the Details</a>
+            <a href="#openhouse" className="inline-flex justify-center text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap w-full sm:w-auto">Open House</a>
           </div>
         </div>
         
@@ -294,8 +296,9 @@ export default function StonebridgePage() {
                   "Shops, schools, all nearby",
                   "Easy access to Boulder or Denver if you really want to go there",
                   "Mountains! We have moutains! They can't say that in Des Moines",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 py-3 text-sm font-medium text-[#1a2744]">
+                  "Information provided is deemed reliable but not guaranteed. This is not an attempt to solicit an already listed property."
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 py-3 text-sm font-medium text-[#1a2744]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#c9973a] flex-shrink-0" />{item}
                   </li>
                 ))}
@@ -441,7 +444,7 @@ export default function StonebridgePage() {
             <div className="flex flex-col gap-4 pt-2">
               {openHouses.map((oh, idx) => (
                 <div
-                  key={idx}
+                  幕key={idx}
                   className={`rounded-2xl border transition-all duration-200 ${
                     oh.featured
                       ? "border-[#c9973a] bg-[#c9973a]/[0.04]"
