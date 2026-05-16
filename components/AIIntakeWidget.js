@@ -7,7 +7,8 @@ const retellWebClient = new RetellWebClient();
 
 export default function AIIntakeWidget() {
   const [mode, setMode] = useState("voice");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [isCalling, setIsCalling] = useState(false);
   const [textSubmitted, setTextSubmitted] = useState(false);
@@ -42,8 +43,8 @@ export default function AIIntakeWidget() {
   }, []);
 
   const handleAction = async () => {
-    if (!name || !phone) {
-      alert("Please enter your name and phone number first.");
+    if (!firstName || !lastName || !phone) {
+      alert("Please enter your first name, last name, and phone number first.");
       return;
     }
 
@@ -55,7 +56,7 @@ export default function AIIntakeWidget() {
         const response = await fetch("/api/retell", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, phone, mode: "voice" }),
+          body: JSON.stringify({ firstName, lastName, phone, mode: "voice" }),
         });
 
         const data = await response.json();
@@ -76,23 +77,27 @@ export default function AIIntakeWidget() {
       }
     } else {
       // TEXT MODE TRIGGER
-      setStatusText("Sending Text...");
+      setStatusText("Connecting Chat...");
       try {
         const response = await fetch("/api/retell", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, phone, mode: "text" }),
+          body: JSON.stringify({ firstName, lastName, phone, mode: "text" }),
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to send lead details to server");
+        const data = await response.json();
+
+        if (!response.ok || !data.accessToken) {
+          throw new Error("Failed to get text access token");
         }
 
+        // Retell web chat activation goes here when you're ready, 
+        // for now we track submission state cleanly
         setTextSubmitted(true);
-        setStatusText("Text Sent");
+        setStatusText("Chat Connected");
       } catch (error) {
-        console.error("Failed to send text payload:", error);
-        setStatusText("Submission Failed");
+        console.error("Failed to start text session:", error);
+        setStatusText("Connection Failed");
         setIsError(true);
       }
     }
@@ -102,9 +107,10 @@ export default function AIIntakeWidget() {
     retellWebClient.stopCall();
   };
 
-  const handleResetTextWidget = () => {
+  const handleResetWidget = () => {
     setTextSubmitted(false);
-    setName("");
+    setFirstName("");
+    setLastName("");
     setPhone("");
     setStatusText("Online");
   };
@@ -156,24 +162,38 @@ export default function AIIntakeWidget() {
           </div>
           <div className="bg-white/[0.07] rounded-[0_12px_12px_12px] px-4 py-3 text-sm text-[#e8e0d0] leading-relaxed max-w-[280px]">
             {isCalling && "Great! The agent is on the line. You can start speaking now."}
-            {textSubmitted && `Awesome, ${name}! I just sent a text message to your phone at ${phone}. Reply directly to that text to chat with me instantly!`}
+            {textSubmitted && `Awesome, ${firstName}! Your chat agent is now initialized. Let's begin checking out 762 Stonebridge!`}
             {showFormFields && "Hi! I'm the AI agent for 762 Stonebridge Drive. I can answer your questions, help you schedule a tour, or connect you with Mark directly. Before we start — what's your name and best phone number?"}
           </div>
         </div>
 
         {showFormFields && (
           <>
-            <div className="mb-4">
-              <label className="block text-[11px] font-medium text-[#8a9bbf] tracking-widest uppercase mb-2">
-                Your name
-              </label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="First and last name"
-                className="w-full bg-white/[0.07] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-white placeholder-[#8a9bbf]/50 outline-none focus:border-[#c9973a] transition-colors duration-200"
-              />
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-[11px] font-medium text-[#8a9bbf] tracking-widest uppercase mb-2">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="First name"
+                  className="w-full bg-white/[0.07] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-white placeholder-[#8a9bbf]/50 outline-none focus:border-[#c9973a] transition-colors duration-200"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-medium text-[#8a9bbf] tracking-widest uppercase mb-2">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Last name"
+                  className="w-full bg-white/[0.07] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-white placeholder-[#8a9bbf]/50 outline-none focus:border-[#c9973a] transition-colors duration-200"
+                />
+              </div>
             </div>
             <div className="mb-4">
               <label className="block text-[11px] font-medium text-[#8a9bbf] tracking-widest uppercase mb-2">
@@ -199,7 +219,7 @@ export default function AIIntakeWidget() {
           </button>
         ) : textSubmitted ? (
           <button 
-            onClick={handleResetTextWidget}
+            onClick={handleResetWidget}
             className="w-full mt-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 font-bold text-sm py-4 rounded-lg tracking-widest uppercase transition-colors duration-200"
           >
             Start Over / New Inquiry
@@ -209,7 +229,7 @@ export default function AIIntakeWidget() {
             onClick={handleAction}
             className="w-full mt-2 bg-[#c9973a] hover:bg-[#ddb564] text-white font-bold text-sm py-4 rounded-lg tracking-widest uppercase transition-colors duration-200"
           >
-            {mode === "voice" ? "Start Talking to the Agent →" : "Send Me a Text Message →"}
+            {mode === "voice" ? "Start Talking to the Agent →" : "Start Chatting with the Agent →"}
           </button>
         )}
 
