@@ -33,10 +33,7 @@ export const metadata = {
   },
   alternates: { canonical: "https://762stonebridge.solomonhomeservices.com" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-  other: {
-    "fb:app_id": "906306361981533",
-  },
-};
+  };
 
 const jsonLd = {
   "@context": "https://schema.org",
