@@ -4,33 +4,58 @@ import Footer from "@/components/Footer";
 
 export const metadata = {
   metadataBase: new URL("https://762stonebridge.solomonhomeservices.com"),
+
   title: {
-    default: "762 Stonebridge Drive, Longmont CO 80503 | Solomon Home Services",
+    default: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000 | Solomon Home Services",
     template: "%s | Solomon Home Services",
   },
+
   description:
-    "762 Stonebridge Drive, Longmont, CO 80503 — 3 bed, 3 bath, 1,549 sq ft townhome in Parkes at Stonebridge. Listed at $460,000. Built 2019. 2-car garage. Served by St. Vrain Valley schools.",
+    "A 2019-built townhome in Parkes at Stonebridge, Longmont, CO 80503. 3 bed · 3 bath · 1,549 sq ft · 2-car garage · Listed at $460,000. Served by St. Vrain Valley schools. Listed by Mark Solomon, REALTOR®.",
+
+  alternates: {
+    canonical: "https://762stonebridge.solomonhomeservices.com/",
+  },
+
   openGraph: {
-    title: "762 Stonebridge Drive | Solomon Home Services",
-    description: "3 bed, 3 bath, 1,549 sq ft luxury townhome in Parkes at Stonebridge. Listed at $460,000.",
-    url: "https://762stonebridge.solomonhomeservices.com",
+    title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
+    description:
+      "A 2019-built townhome in Parkes at Stonebridge. 3 bed · 3 bath · 1,549 sq ft · 2-car garage. Listed by Mark Solomon, REALTOR®. Schedule a tour today.",
+    url: "https://762stonebridge.solomonhomeservices.com/",
     siteName: "Solomon Home Services",
     images: [
       {
-        url: "/02-MG_6804.jpg", // Automatically pulls from your public folder
+        url: "/02-MG_6804.jpg",
         width: 1200,
         height: 630,
-        alt: "762 Stonebridge Drive Exterior Property View",
+        alt: "762 Stonebridge Drive, Longmont CO 80503 — exterior view of townhome listing",
       },
     ],
     locale: "en_US",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "762 Stonebridge Drive | Solomon Home Services",
-    description: "3 bed, 3 bath luxury townhome in Parkes at Stonebridge. Listed at $460,000.",
+    title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
+    description:
+      "3 bed · 3 bath · 1,549 sq ft · Built 2019 · 2-car garage. Listed by Mark Solomon, REALTOR®.",
     images: ["/02-MG_6804.jpg"],
+  },
+
+  // ✅ Fixes the Facebook Sharing Debugger "fb:app_id missing" warning
+  // Replace YOUR_META_APP_ID_HERE with your actual ID from developers.facebook.com
+  other: {
+    "fb:app_id": 906306361981533,
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
