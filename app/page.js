@@ -24,16 +24,20 @@ export const metadata = {
     title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
     description:
       "A 2019-built townhome in Parkes at Stonebridge. 3 bed · 3 bath · 1,549 sq ft · 2-car garage. Listed by Mark Solomon, REALTOR®.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "762 Stonebridge Drive, Longmont, CO 80503" }],
+    images: [{ url: "/02-MG_6804.jpg", width: 1200, height: 630, alt: "762 Stonebridge Drive, Longmont, CO 80503" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
     description: "3 bed · 3 bath · 1,549 sq ft townhome in Parkes at Stonebridge. Built 2019. Listed by Mark Solomon, REALTOR®.",
-    images: ["/og-image.jpg"],
+    images: ["/02-MG_6804.jpg"],
   },
   alternates: { canonical: "https://762stonebridge.solomonhomeservices.com" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  // ✅ Facebook Sharing Debugger fix — fb:app_id registered to Solomon Home Services
+  other: {
+    "fb:app_id": "906306361981533",
+  },
 };
 
 // ─── JSON-LD ───────────────────────────────────────────────────────────────────
@@ -49,7 +53,7 @@ const jsonLd = {
       "offers": { "@type": "Offer", "price": "460000", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "validFrom": "2026-05-14" },
       "address": { "@type": "PostalAddress", "streetAddress": "762 Stonebridge Drive", "addressLocality": "Longmont", "addressRegion": "CO", "postalCode": "80503", "addressCountry": "US" },
       "geo": { "@type": "GeoCoordinates", "latitude": "40.1583", "longitude": "-105.0603" },
-      "image": "https://762stonebridge.solomonhomeservices.com/og-image.jpg",
+      "image": "https://762stonebridge.solomonhomeservices.com/02-MG_6804.jpg",
       "numberOfRooms": "6",
       "floorSize": { "@type": "QuantitativeValue", "value": 1549, "unitCode": "FTK", "unitText": "square feet" },
       "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3, "yearBuilt": 2019,
@@ -104,9 +108,7 @@ const jsonLd = {
 // ─── OPEN HOUSE DATA (DYNAMIC) ────────────────────────────────────────────────
 function getNextTwoSaturdays() {
   const now = new Date();
-  const day = now.getDay(); // 0 = Sun, 6 = Sat
-
-  // If today is Saturday and it's past 3pm, treat it as done and skip to next Saturday
+  const day = now.getDay();
   const isPastSaturday = day === 6 && now.getHours() >= 15;
   const daysUntilNextSat = isPastSaturday
     ? 7
@@ -151,7 +153,7 @@ const openHouses = [
   },
 ];
 
-// ─── NEIGHBORHOOD CARDS (no JSX in data) ──────────────────────────────────────
+// ─── NEIGHBORHOOD CARDS ───────────────────────────────────────────────────────
 const nbhdCards = [
   {
     title: "Luxury townhome community",
@@ -175,7 +177,7 @@ const nbhdCards = [
   },
 ];
 
-// ─── SPECS (no JSX in data) ───────────────────────────────────────────────────
+// ─── SPECS ────────────────────────────────────────────────────────────────────
 const specs = [
   { label: "Bedrooms", value: "3" },
   { label: "Bathrooms", value: "3" },
@@ -263,8 +265,6 @@ export default function StonebridgePage() {
           <p className="text-[#e8e0d0] leading-relaxed mb-11 max-w-[420px]" style={{ fontSize: "clamp(14px,1.5vw,17px)" }}>
             A luxury townhome where your front door opens directly into one of Longmont&apos;s most beautiful subdivision community parks. No, really — it&apos;s literally called the Parkes. Because of the park.
           </p>
-
-          {/* RESPONSIVE LAYOUT ACTION BUTTONS */}
           <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 w-full sm:w-auto mt-8">
             <a href="#contact" className="inline-flex justify-center items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-6 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px whitespace-nowrap w-full sm:w-auto">Schedule a Tour →</a>
             <a href="#description" className="inline-flex justify-center text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap w-full sm:w-auto">See the Details</a>
@@ -390,20 +390,12 @@ export default function StonebridgePage() {
           <p className="text-[16px] text-[#1a2744]/60 mb-10">
             All 25 photos — click any image to open the full viewer. Use arrow keys to browse.
           </p>
-
           <PhotoGallery />
-
           <div className="mt-14 flex flex-col sm:flex-row items-center gap-5 justify-center">
-            <a
-              href="#openhouse"
-              className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-10 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px"
-            >
+            <a href="#openhouse" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-10 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px">
               See Open House Dates →
             </a>
-            <a
-              href="#contact"
-              className="text-[#1a2744] border border-[#1a2744]/20 hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-8 py-4 rounded-lg tracking-widest uppercase transition-all duration-200"
-            >
+            <a href="#contact" className="text-[#1a2744] border border-[#1a2744]/20 hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-8 py-4 rounded-lg tracking-widest uppercase transition-all duration-200">
               Talk to the AI Agent
             </a>
           </div>
@@ -478,7 +470,6 @@ export default function StonebridgePage() {
                 📞 Call Mark: (816) 853-5467
               </a>
             </div>
-
             <div className="flex flex-col gap-4 pt-2">
               {openHouses.map((oh, idx) => (
                 <div
@@ -512,7 +503,7 @@ export default function StonebridgePage() {
                         <div className="text-[12px] text-[#1a2744]/55 leading-relaxed">{oh.subline}</div>
                       )}
                       {oh.cta && (
-                        <a
+                        
                           href={oh.cta.href}
                           className="inline-flex items-center gap-2 mt-4 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-5 py-2.5 rounded-lg tracking-widest uppercase transition-colors duration-200"
                         >
@@ -528,7 +519,7 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ AI INTAKE — below Open House ══════════════════════════════════════ */}
+      {/* ══ AI INTAKE ═════════════════════════════════════════════════════════ */}
       <section id="contact" className="bg-[#ede6d8] py-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
