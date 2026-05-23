@@ -1,7 +1,6 @@
 import AIIntakeWidget from "@/components/AIIntakeWidget";
 import PhotoGallery from "@/components/PhotoGallery";
 
-// ─── METADATA ──────────────────────────────────────────────────────────────────
 export const metadata = {
   title: "762 Stonebridge Drive, Longmont CO 80503 | 3BD/3BA Townhome For Sale",
   description:
@@ -34,13 +33,11 @@ export const metadata = {
   },
   alternates: { canonical: "https://762stonebridge.solomonhomeservices.com" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-  // ✅ Facebook Sharing Debugger fix — fb:app_id registered to Solomon Home Services
   other: {
     "fb:app_id": "906306361981533",
   },
 };
 
-// ─── JSON-LD ───────────────────────────────────────────────────────────────────
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -105,23 +102,15 @@ const jsonLd = {
   ],
 };
 
-// ─── OPEN HOUSE DATA (DYNAMIC) ────────────────────────────────────────────────
 function getNextTwoSaturdays() {
   const now = new Date();
   const day = now.getDay();
   const isPastSaturday = day === 6 && now.getHours() >= 15;
-  const daysUntilNextSat = isPastSaturday
-    ? 7
-    : (6 - day + 7) % 7 === 0
-    ? 7
-    : (6 - day + 7) % 7;
-
+  const daysUntilNextSat = isPastSaturday ? 7 : (6 - day + 7) % 7 === 0 ? 7 : (6 - day + 7) % 7;
   const sat1 = new Date(now);
   sat1.setDate(now.getDate() + daysUntilNextSat);
-
   const sat2 = new Date(sat1);
   sat2.setDate(sat1.getDate() + 7);
-
   return [sat1, sat2].map((date, idx) => ({
     month: date.toLocaleString("en-US", { month: "short" }),
     day: date.getDate(),
@@ -139,45 +128,24 @@ function getNextTwoSaturdays() {
 const openHouses = [
   ...getNextTwoSaturdays(),
   {
-    month: null,
-    day: null,
-    dow: null,
+    month: null, day: null, dow: null,
     time: "By Appointment Only",
     badge: "Private Showing",
     badgeStyle: "navy",
     featured: false,
     headline: "Private Showing",
-    subline:
-      "Want to see it on your schedule? Call Mark directly and we'll make it happen — no waiting for the next open house.",
+    subline: "Want to see it on your schedule? Call Mark directly and we'll make it happen — no waiting for the next open house.",
     cta: { label: "📞 Call Mark: (816) 853-5467", href: "tel:8168535467" },
   },
 ];
 
-// ─── NEIGHBORHOOD CARDS ───────────────────────────────────────────────────────
 const nbhdCards = [
-  {
-    title: "Luxury townhome community",
-    body: "Custom landscaping, architectural consistency, and pride of ownership throughout. You know the kind of neighborhood where people actually take care of their homes? That's this one.",
-    iconIndex: 0,
-  },
-  {
-    title: "Strategic commuter location",
-    body: "Diagonal Highway (CO-119) puts Boulder 15 minutes away and Denver within striking distance. You're not choosing between location and lifestyle — you're getting both.",
-    iconIndex: 1,
-  },
-  {
-    title: "Top-tier education pipeline",
-    body: "Eagle Crest Elementary (B+) → Altona Middle (A-) → Silver Creek High (A). St. Vrain Valley School District is consistently ranked among Colorado's best.",
-    iconIndex: 2,
-  },
-  {
-    title: "Outdoor lifestyle built-in",
-    body: "Dry Creek Trail system provides direct access to Longmont's best outdoor infrastructure. Walk, bike, or run without loading the car. Meadow Village Park is steps away.",
-    iconIndex: 3,
-  },
+  { title: "Luxury townhome community", body: "Custom landscaping, architectural consistency, and pride of ownership throughout. You know the kind of neighborhood where people actually take care of their homes? That's this one.", iconIndex: 0 },
+  { title: "Strategic commuter location", body: "Diagonal Highway (CO-119) puts Boulder 15 minutes away and Denver within striking distance. You're not choosing between location and lifestyle — you're getting both.", iconIndex: 1 },
+  { title: "Top-tier education pipeline", body: "Eagle Crest Elementary (B+) → Altona Middle (A-) → Silver Creek High (A). St. Vrain Valley School District is consistently ranked among Colorado's best.", iconIndex: 2 },
+  { title: "Outdoor lifestyle built-in", body: "Dry Creek Trail system provides direct access to Longmont's best outdoor infrastructure. Walk, bike, or run without loading the car. Meadow Village Park is steps away.", iconIndex: 3 },
 ];
 
-// ─── SPECS ────────────────────────────────────────────────────────────────────
 const specs = [
   { label: "Bedrooms", value: "3" },
   { label: "Bathrooms", value: "3" },
@@ -185,33 +153,25 @@ const specs = [
   { label: "Garage", value: "2-Car" },
 ];
 
-// ─── ICON COMPONENTS ──────────────────────────────────────────────────────────
 function SpecIcon({ index }) {
   if (index === 0) return (
     <svg style={{ width: 22, height: 22 }} fill="none" stroke="#c9973a" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
     </svg>
   );
   if (index === 1) return (
     <svg style={{ width: 22, height: 22 }} fill="none" stroke="#c9973a" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <path d="M4 12h16M4 18h16M4 6h16" />
-      <circle cx="8" cy="18" r="1" />
-      <circle cx="16" cy="18" r="1" />
+      <path d="M4 12h16M4 18h16M4 6h16" /><circle cx="8" cy="18" r="1" /><circle cx="16" cy="18" r="1" />
     </svg>
   );
   if (index === 2) return (
     <svg style={{ width: 22, height: 22 }} fill="none" stroke="#c9973a" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <rect x="2" y="7" width="20" height="14" rx="2" />
-      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      <rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
     </svg>
   );
   return (
     <svg style={{ width: 22, height: 22 }} fill="none" stroke="#c9973a" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <rect x="1" y="3" width="15" height="13" rx="1" />
-      <path d="M16 8h4l3 3v5h-7V8zM5 17h14" />
-      <circle cx="5.5" cy="17.5" r="1.5" />
-      <circle cx="18.5" cy="17.5" r="1.5" />
+      <rect x="1" y="3" width="15" height="13" rx="1" /><path d="M16 8h4l3 3v5h-7V8zM5 17h14" /><circle cx="5.5" cy="17.5" r="1.5" /><circle cx="18.5" cy="17.5" r="1.5" />
     </svg>
   );
 }
@@ -219,22 +179,17 @@ function SpecIcon({ index }) {
 function NbhdIcon({ index }) {
   if (index === 0) return (
     <svg style={{ width: 24, height: 24 }} fill="none" stroke="#c9973a" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
     </svg>
   );
   if (index === 1) return (
     <svg style={{ width: 24, height: 24 }} fill="none" stroke="#c9973a" strokeWidth={1.5} strokeLinecap="round" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 8v4l3 3" />
+      <circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" />
     </svg>
   );
   if (index === 2) return (
     <svg style={{ width: 24, height: 24 }} fill="none" stroke="#c9973a" strokeWidth={1.5} strokeLinecap="round" viewBox="0 0 24 24">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   );
   return (
@@ -244,13 +199,11 @@ function NbhdIcon({ index }) {
   );
 }
 
-// ─── PAGE ──────────────────────────────────────────────────────────────────────
 export default function StonebridgePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
       <section id="hero" className="bg-[#1a2744] min-h-[88vh] grid grid-cols-1 lg:grid-cols-2 relative overflow-hidden pt-16">
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 80% 50%, rgba(201,151,58,0.06) 0%, transparent 60%)" }} />
         <div className="flex flex-col justify-center px-10 lg:px-16 py-20 z-10">
@@ -271,14 +224,9 @@ export default function StonebridgePage() {
             <a href="#openhouse" className="inline-flex justify-center text-white border border-white/30 bg-white/[0.07] hover:bg-white/[0.14] hover:border-white/60 text-[12px] font-medium px-5 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 whitespace-nowrap w-full sm:w-auto">Open House</a>
           </div>
         </div>
-
         <div className="relative bg-[#243259] min-h-[360px] lg:min-h-0">
           <div className="absolute inset-0 border-l border-white/[0.08]">
-            <img
-              src="/02-MG_6804.jpg"
-              alt="762 Stonebridge Drive Exterior"
-              className="w-full h-full object-cover"
-            />
+            <img src="/02-MG_6804.jpg" alt="762 Stonebridge Drive Exterior" className="w-full h-full object-cover" />
           </div>
           <div className="absolute top-8 left-8">
             <span className="text-[11px] font-semibold text-[#c9973a] tracking-[0.12em] uppercase bg-[#c9973a]/15 border border-[#c9973a] px-4 py-1.5 rounded">Active Listing</span>
@@ -289,7 +237,6 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ SPECS BAR ═════════════════════════════════════════════════════════ */}
       <div className="bg-[#111b35] border-t border-b border-white/[0.08]">
         <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4">
           {specs.map((spec, i) => (
@@ -306,7 +253,6 @@ export default function StonebridgePage() {
         </div>
       </div>
 
-      {/* ══ DESCRIPTION ═══════════════════════════════════════════════════════ */}
       <section id="description" className="bg-[#f5f0e8] pt-24 pb-12">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
@@ -370,14 +316,12 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ DIVIDER ═══════════════════════════════════════════════════════════ */}
       <div className="bg-[#f5f0e8]">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="w-full h-px bg-[#c9973a]/30" />
         </div>
       </div>
 
-      {/* ══ GALLERY ═══════════════════════════════════════════════════════════ */}
       <section id="gallery" className="bg-[#f5f0e8] pt-12 pb-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="flex items-center gap-3 mb-4">
@@ -387,22 +331,15 @@ export default function StonebridgePage() {
           <h2 className="text-[#1a2744] font-light mb-2" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,4vw,48px)" }}>
             See <em className="italic text-[#c9973a]">inside</em> the home.
           </h2>
-          <p className="text-[16px] text-[#1a2744]/60 mb-10">
-            All 25 photos — click any image to open the full viewer. Use arrow keys to browse.
-          </p>
+          <p className="text-[16px] text-[#1a2744]/60 mb-10">All 25 photos — click any image to open the full viewer. Use arrow keys to browse.</p>
           <PhotoGallery />
           <div className="mt-14 flex flex-col sm:flex-row items-center gap-5 justify-center">
-            <a href="#openhouse" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-10 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px">
-              See Open House Dates →
-            </a>
-            <a href="#contact" className="text-[#1a2744] border border-[#1a2744]/20 hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-8 py-4 rounded-lg tracking-widest uppercase transition-all duration-200">
-              Talk to the AI Agent
-            </a>
+            <a href="#openhouse" className="inline-flex items-center gap-2 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[13px] font-semibold px-10 py-4 rounded-lg tracking-widest uppercase transition-all duration-200 hover:-translate-y-px">See Open House Dates →</a>
+            <a href="#contact" className="text-[#1a2744] border border-[#1a2744]/20 hover:border-[#c9973a] hover:text-[#c9973a] text-[13px] font-medium px-8 py-4 rounded-lg tracking-widest uppercase transition-all duration-200">Talk to the AI Agent</a>
           </div>
         </div>
       </section>
 
-      {/* ══ NEIGHBORHOOD ══════════════════════════════════════════════════════ */}
       <section id="neighborhood" className="bg-[#1a2744] py-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="flex items-center gap-3 mb-4">
@@ -448,7 +385,6 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ OPEN HOUSE ════════════════════════════════════════════════════════ */}
       <section id="openhouse" className="bg-white py-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
@@ -472,18 +408,8 @@ export default function StonebridgePage() {
             </div>
             <div className="flex flex-col gap-4 pt-2">
               {openHouses.map((oh, idx) => (
-                <div
-                  key={idx}
-                  className={`rounded-2xl border transition-all duration-200 ${
-                    oh.featured
-                      ? "border-[#c9973a] bg-[#c9973a]/[0.04]"
-                      : "border-[#1a2744]/[0.08] bg-[#f5f0e8] hover:border-[#c9973a] hover:shadow-[0_4px_20px_rgba(201,151,58,0.12)]"
-                  }`}
-                >
-                  <div
-                    className="grid items-start gap-5 px-7 py-6"
-                    style={{ gridTemplateColumns: oh.day ? "64px 1fr" : "1fr" }}
-                  >
+                <div key={idx} className={`rounded-2xl border transition-all duration-200 ${oh.featured ? "border-[#c9973a] bg-[#c9973a]/[0.04]" : "border-[#1a2744]/[0.08] bg-[#f5f0e8] hover:border-[#c9973a] hover:shadow-[0_4px_20px_rgba(201,151,58,0.12)]"}`}>
+                  <div className="grid items-start gap-5 px-7 py-6" style={{ gridTemplateColumns: oh.day ? "64px 1fr" : "1fr" }}>
                     {oh.day && (
                       <div className="text-center pt-1">
                         <div className="text-[10px] font-semibold text-[#c9973a] tracking-widest uppercase">{oh.month}</div>
@@ -495,21 +421,14 @@ export default function StonebridgePage() {
                       <span className={`inline-block mb-2 text-[10px] font-bold px-3 py-1 rounded-full tracking-wider uppercase ${oh.badgeStyle === "gold" ? "bg-[#c9973a] text-white" : "bg-[#1a2744]/10 text-[#1a2744]"}`}>
                         {oh.badge}
                       </span>
-                      {oh.headline && (
-                        <div className="text-[15px] font-semibold text-[#1a2744] mb-1">{oh.headline}</div>
-                      )}
+                      {oh.headline && <div className="text-[15px] font-semibold text-[#1a2744] mb-1">{oh.headline}</div>}
                       <div className="text-[13px] font-medium text-[#1a2744] mb-1">{oh.time}</div>
-                      {oh.subline && (
-                        <div className="text-[12px] text-[#1a2744]/55 leading-relaxed">{oh.subline}</div>
-                      )}
+                      {oh.subline && <div className="text-[12px] text-[#1a2744]/55 leading-relaxed">{oh.subline}</div>}
                       {oh.cta && (
-  
-    href={oh.cta.href}
-    className="inline-flex items-center gap-2 mt-4 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-5 py-2.5 rounded-lg tracking-widest uppercase transition-colors duration-200"
-  >
-    {oh.cta.label}
-  </a>
-)}
+                        <a href={oh.cta.href} className="inline-flex items-center gap-2 mt-4 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-5 py-2.5 rounded-lg tracking-widest uppercase transition-colors duration-200">
+                          {oh.cta.label}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -519,7 +438,6 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ AI INTAKE ═════════════════════════════════════════════════════════ */}
       <section id="contact" className="bg-[#ede6d8] py-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -555,7 +473,6 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ SELLER CTA ════════════════════════════════════════════════════════ */}
       <section className="bg-[#1a2744] py-24">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -589,7 +506,6 @@ export default function StonebridgePage() {
         </div>
       </section>
 
-      {/* ══ AGENT CTA ═════════════════════════════════════════════════════════ */}
       <div className="bg-[#ede6d8] py-16">
         <div className="max-w-[1200px] mx-auto px-8 lg:px-16">
           <div className="bg-white rounded-2xl px-12 py-12 grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center gap-12">
