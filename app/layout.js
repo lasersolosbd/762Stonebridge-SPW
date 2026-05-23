@@ -42,12 +42,6 @@ export const metadata = {
       "3 bed · 3 bath · 1,549 sq ft · Built 2019 · 2-car garage. Listed by Mark Solomon, REALTOR®.",
     images: ["/02-MG_6804.jpg"],
   },
-
-  // ✅ Facebook Sharing Debugger fix — fb:app_id registered to Solomon Home Services
-  other: {
-    "fb:app_id": "906306361981533",
-  },
-
   robots: {
     index: true,
     follow: true,
@@ -63,6 +57,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* Google Fonts — Fraunces (display) + DM Sans (body) */}
+        <meta property="fb:app_id" content="906306361981533" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
