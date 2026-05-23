@@ -503,13 +503,13 @@ export default function StonebridgePage() {
                         <div className="text-[12px] text-[#1a2744]/55 leading-relaxed">{oh.subline}</div>
                       )}
                       {oh.cta && (
-                        
-                          href={oh.cta.href}
-                          className="inline-flex items-center gap-2 mt-4 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-5 py-2.5 rounded-lg tracking-widest uppercase transition-colors duration-200"
-                        >
-                          {oh.cta.label}
-                        </a>
-                      )}
+  
+    href={oh.cta.href}
+    className="inline-flex items-center gap-2 mt-4 bg-[#c9973a] hover:bg-[#ddb564] text-white text-[12px] font-semibold px-5 py-2.5 rounded-lg tracking-widest uppercase transition-colors duration-200"
+  >
+    {oh.cta.label}
+  </a>
+)}
                     </div>
                   </div>
                 </div>
