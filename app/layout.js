@@ -43,10 +43,9 @@ export const metadata = {
     images: ["/02-MG_6804.jpg"],
   },
 
-  // ✅ Fixes the Facebook Sharing Debugger "fb:app_id missing" warning
-  // Replace YOUR_META_APP_ID_HERE with your actual ID from developers.facebook.com
+  // ✅ Facebook Sharing Debugger fix — fb:app_id registered to Solomon Home Services
   other: {
-    "fb:app_id": 906306361981533,
+    "fb:app_id": "906306361981533",
   },
 
   robots: {
