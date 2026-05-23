@@ -22,13 +22,13 @@ export const metadata = {
     siteName: "Solomon Home Services",
     title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
     description:
-      "A single property website by Solomon Home Services - Mark Solomon, REALTOR®.",
+      "A single property website by Solomon Home Services - Mark Solomon, REALTOR®",
     images: [{ url: "/02-MG_6804.jpg", width: 1200, height: 630, alt: "762 Stonebridge Drive, Longmont, CO 80503" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
-    description: "3 bed · 3 bath · 1,549 sq ft townhome in Parkes at Stonebridge. Built 2019. Listed by Mark Solomon, REALTOR®.",
+    description: "A single property website by Solomon Home Services - Mark Solomon, REALTOR®",
     images: ["/02-MG_6804.jpg"],
   },
   alternates: { canonical: "https://762stonebridge.solomonhomeservices.com" },
