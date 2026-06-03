@@ -33,7 +33,7 @@ export const metadata = {
   },
   alternates: { canonical: "https://762stonebridge.solomonhomeservices.com" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
-  };
+};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -99,42 +99,60 @@ const jsonLd = {
   ],
 };
 
-function getNextTwoSaturdays() {
+// ---------------------------------------------------------------------------
+// OPEN HOUSE SCHEDULE
+// Add or remove dates here as needed. Each open house expires at 3:00 PM MT
+// on the day of the event. Once all dates have passed, only the Private
+// Showing card is displayed.
+// ---------------------------------------------------------------------------
+const SCHEDULED_OPEN_HOUSES = [
+  { year: 2026, month: 5,  day: 23 }, // May 23
+  { year: 2026, month: 5,  day: 30 }, // May 30
+  { year: 2026, month: 6,  day:  6 }, // Jun  6
+  { year: 2026, month: 6,  day: 13 }, // Jun 13
+];
+
+function getUpcomingOpenHouses() {
   const now = new Date();
-  const day = now.getDay();
-  const isPastSaturday = day === 6 && now.getHours() >= 15;
-  const daysUntilNextSat = isPastSaturday ? 7 : (6 - day + 7) % 7 === 0 ? 7 : (6 - day + 7) % 7;
-  const sat1 = new Date(now);
-  sat1.setDate(now.getDate() + daysUntilNextSat);
-  const sat2 = new Date(sat1);
-  sat2.setDate(sat1.getDate() + 7);
-  return [sat1, sat2].map((date, idx) => ({
-    month: date.toLocaleString("en-US", { month: "short" }),
-    day: date.getDate(),
-    dow: "Sat",
-    time: "1:00 PM – 3:00 PM",
-    badge: "Open House",
-    badgeStyle: "gold",
-    featured: idx === 0,
-    headline: null,
-    subline: "Public Open House · All welcome",
-    cta: null,
-  }));
+
+  const upcoming = SCHEDULED_OPEN_HOUSES.filter(({ year, month, day }) => {
+    // Open house expires at 3:00 PM Mountain Time (UTC-6 standard / UTC-7 daylight).
+    // June dates are MDT (UTC-7), May 23 straddles but MDT is already in effect.
+    // Using UTC-6 as a safe conservative cutoff — ends no later than 9 PM UTC.
+    const endUTC = Date.UTC(year, month - 1, day, 21, 0, 0); // 3 PM MDT = 9 PM UTC
+    return now.getTime() < endUTC;
+  });
+
+  return upcoming.map(({ year, month, day }, idx) => {
+    const date = new Date(year, month - 1, day);
+    return {
+      month: date.toLocaleString("en-US", { month: "short" }),
+      day,
+      dow: "Sat",
+      time: "1:00 PM – 3:00 PM",
+      badge: "Open House",
+      badgeStyle: "gold",
+      featured: idx === 0,
+      headline: null,
+      subline: "Public Open House · All welcome",
+      cta: null,
+    };
+  });
 }
 
-const openHouses = [
-  ...getNextTwoSaturdays(),
-  {
-    month: null, day: null, dow: null,
-    time: "By Appointment Only",
-    badge: "Private Showing",
-    badgeStyle: "navy",
-    featured: false,
-    headline: "Private Showing",
-    subline: "Want to see it on your schedule? Call Mark directly and we'll make it happen — no waiting for the next open house.",
-    cta: { label: "📞 Call Mark: (816) 853-5467", href: "tel:8168535467" },
-  },
-];
+// Private Showing card — always appended after open house dates
+const PRIVATE_SHOWING_CARD = {
+  month: null, day: null, dow: null,
+  time: "By Appointment Only",
+  badge: "Private Showing",
+  badgeStyle: "navy",
+  featured: false,
+  headline: "Private Showing",
+  subline: "Want to see it on your schedule? Call Mark directly and we'll make it happen — no waiting for the next open house.",
+  cta: { label: "📞 Call Mark: (816) 853-5467", href: "tel:8168535467" },
+};
+
+// ---------------------------------------------------------------------------
 
 const nbhdCards = [
   { title: "Luxury townhome community", body: "Custom landscaping, architectural consistency, and pride of ownership throughout. You know the kind of neighborhood where people actually take care of their homes? That's this one.", iconIndex: 0 },
@@ -197,6 +215,9 @@ function NbhdIcon({ index }) {
 }
 
 export default function StonebridgePage() {
+  const upcomingOpenHouses = getUpcomingOpenHouses();
+  const openHouses = [...upcomingOpenHouses, PRIVATE_SHOWING_CARD];
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -391,14 +412,25 @@ export default function StonebridgePage() {
                 <span className="text-[11px] font-medium text-[#c9973a] tracking-[0.14em] uppercase">Come See It</span>
               </div>
               <h2 className="text-[#1a2744] font-light leading-tight mb-5" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px,4vw,48px)" }}>
-                Upcoming <em className="italic text-[#c9973a]">open house</em> dates.
+                {upcomingOpenHouses.length > 0
+                  ? <>Upcoming <em className="italic text-[#c9973a]">open house</em> dates.</>
+                  : <>Schedule a <em className="italic text-[#c9973a]">private showing.</em></>
+                }
               </h2>
-              <p className="text-[15px] text-[#1a2744]/65 leading-[1.75] mb-4">
-                No pressure, no hard sell, no one following you from room to room saying &quot;can you just picture yourself here?&quot; Come see the home, walk the park, ask questions — or just enjoy the finishes.
-              </p>
-              <p className="text-[15px] text-[#1a2744]/65 leading-[1.75] mb-8">
-                Tours can also be scheduled privately at a time that works for you. Use the AI agent below or call Mark directly.
-              </p>
+              {upcomingOpenHouses.length > 0 ? (
+                <>
+                  <p className="text-[15px] text-[#1a2744]/65 leading-[1.75] mb-4">
+                    No pressure, no hard sell, no one following you from room to room saying &quot;can you just picture yourself here?&quot; Come see the home, walk the park, ask questions — or just enjoy the finishes.
+                  </p>
+                  <p className="text-[15px] text-[#1a2744]/65 leading-[1.75] mb-8">
+                    Tours can also be scheduled privately at a time that works for you. Use the AI agent below or call Mark directly.
+                  </p>
+                </>
+              ) : (
+                <p className="text-[15px] text-[#1a2744]/65 leading-[1.75] mb-8">
+                  No more public open houses are currently scheduled, but you can absolutely still see the home. Call Mark to arrange a private showing at a time that works for you — no waiting, no crowds, just you and the house.
+                </p>
+              )}
               <a href="tel:8168535467" className="inline-flex items-center gap-2 bg-[#1a2744] hover:bg-[#243259] text-white text-[13px] font-semibold px-8 py-4 rounded-lg tracking-widest uppercase transition-colors duration-200">
                 📞 Call Mark: (816) 853-5467
               </a>
