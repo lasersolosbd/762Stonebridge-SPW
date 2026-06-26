@@ -105,41 +105,49 @@ const jsonLd = {
 // on the day of the event. Once all dates have passed, only the Private
 // Showing card is displayed.
 // ---------------------------------------------------------------------------
-const SCHEDULED_OPEN_HOUSES = [
-  { year: 2026, month: 5,  day: 23 }, // May 23
-  { year: 2026, month: 5,  day: 30 }, // May 30
-  { year: 2026, month: 6,  day:  6 }, // Jun  6
-  { year: 2026, month: 6,  day: 13 }, // Jun 13
-];
-
 function getUpcomingOpenHouses() {
   const now = new Date();
 
-  const upcoming = SCHEDULED_OPEN_HOUSES.filter(({ year, month, day }) => {
-    // Open house expires at 3:00 PM Mountain Time (UTC-6 standard / UTC-7 daylight).
-    // June dates are MDT (UTC-7), May 23 straddles but MDT is already in effect.
-    // Using UTC-6 as a safe conservative cutoff — ends no later than 9 PM UTC.
-    const endUTC = Date.UTC(year, month - 1, day, 21, 0, 0); // 3 PM MDT = 9 PM UTC
-    return now.getTime() < endUTC;
-  });
+  // Find the next Saturday on or after today
+  const day = now.getDay();
+  const hour = now.getHours();
+  const minutes = now.getMinutes();
 
-  return upcoming.map(({ year, month, day }, idx) => {
-    const date = new Date(year, month - 1, day);
-    return {
-      month: date.toLocaleString("en-US", { month: "short" }),
-      day,
-      dow: "Sat",
-      time: "1:00 PM – 3:00 PM",
-      badge: "Open House",
-      badgeStyle: "gold",
-      featured: idx === 0,
-      headline: null,
-      subline: "Public Open House · All welcome",
-      cta: null,
-    };
-  });
+  let daysUntilFirst;
+  if (day === 6) {
+    const pastOpenHouse = hour > 15 || (hour === 15 && minutes > 0);
+    daysUntilFirst = pastOpenHouse ? 7 : 0;
+  } else {
+    daysUntilFirst = (6 - day + 7) % 7 || 7;
+  }
+
+  // Build the next 8 Saturdays, skipping July 4th
+  const saturdays = [];
+  let candidate = new Date(now);
+  candidate.setDate(now.getDate() + daysUntilFirst);
+  candidate.setHours(0, 0, 0, 0);
+
+  while (saturdays.length < 8) {
+    const isJuly4 = candidate.getMonth() === 6 && candidate.getDate() === 4;
+    if (!isJuly4) {
+      saturdays.push(new Date(candidate));
+    }
+    candidate.setDate(candidate.getDate() + 7);
+  }
+
+  return saturdays.map((date, idx) => ({
+    month: date.toLocaleString("en-US", { month: "short" }),
+    day: date.getDate(),
+    dow: "Sat",
+    time: "1:00 PM – 3:00 PM",
+    badge: "Open House",
+    badgeStyle: "gold",
+    featured: idx === 0,
+    headline: null,
+    subline: "Public Open House · All welcome",
+    cta: null,
+  }));
 }
-
 // Private Showing card — always appended after open house dates
 const PRIVATE_SHOWING_CARD = {
   month: null, day: null, dow: null,
