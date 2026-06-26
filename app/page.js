@@ -127,7 +127,7 @@ function getUpcomingOpenHouses() {
   candidate.setDate(now.getDate() + daysUntilFirst);
   candidate.setHours(0, 0, 0, 0);
 
-  while (saturdays.length < 8) {
+  while (saturdays.length < 2) {
     const isJuly4 = candidate.getMonth() === 6 && candidate.getDate() === 4;
     if (!isJuly4) {
       saturdays.push(new Date(candidate));
