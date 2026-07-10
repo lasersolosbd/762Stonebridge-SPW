@@ -1,6 +1,6 @@
 import AIIntakeWidget from "@/components/AIIntakeWidget";
 import PhotoGallery from "@/components/PhotoGallery";
-export const revalidate = 3600; // regenerate this page at most once per hour
+export const dynamic = "force-dynamic";
 export const metadata = {
   title: "762 Stonebridge Drive, Longmont CO 80503 | 3BD/3BA Townhome For Sale",
   description:
