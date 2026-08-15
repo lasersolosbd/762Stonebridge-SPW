@@ -104,14 +104,22 @@ const jsonLd = {
 // Add or remove dates here as needed. Each open house expires at 3:00 PM MT
 // on the day of the event. Once all dates have passed, only the Private
 // Showing card is displayed.
+//
+// NOTE: All date math below is computed in America/Denver (Mountain) time,
+// not the server's local timezone. Vercel's Node runtime runs in UTC, so
+// using new Date().getDay()/getHours() directly would make the "3:00 PM
+// cutoff" check fire hours too early and skip today's open house.
 // ---------------------------------------------------------------------------
 function getUpcomingOpenHouses() {
-  const now = new Date();
+  // Get "now" as Mountain Time wall-clock values, regardless of server timezone
+  const nowMT = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/Denver" })
+  );
 
   // Find the next Saturday on or after today
-  const day = now.getDay();
-  const hour = now.getHours();
-  const minutes = now.getMinutes();
+  const day = nowMT.getDay();
+  const hour = nowMT.getHours();
+  const minutes = nowMT.getMinutes();
 
   let daysUntilFirst;
   if (day === 6) {
@@ -123,8 +131,8 @@ function getUpcomingOpenHouses() {
 
   // Build the next 8 Saturdays, skipping July 4th
   const saturdays = [];
-  let candidate = new Date(now);
-  candidate.setDate(now.getDate() + daysUntilFirst);
+  let candidate = new Date(nowMT);
+  candidate.setDate(nowMT.getDate() + daysUntilFirst);
   candidate.setHours(0, 0, 0, 0);
 
   while (saturdays.length < 2) {
