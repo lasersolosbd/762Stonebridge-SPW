@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   metadataBase: new URL("https://762stonebridge.solomonhomeservices.com"),
@@ -73,6 +74,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
