@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   metadataBase: new URL("https://762stonebridge.solomonhomeservices.com"),
@@ -11,7 +12,7 @@ export const metadata = {
   },
 
   description:
-    "A 2019-built townhome in Parkes at Stonebridge, Longmont, CO 80503. 3 bed · 3 bath · 1,549 sq ft · 2-car garage · Listed at $460,000. Served by St. Vrain Valley schools. Listed by Mark Solomon, REALTOR®.",
+    "A 2019-built townhome in Parkes at Stonebridge, Longmont, CO 80503. 3 bed · 2.5 bath · 1,549 sq ft · 2-car garage · Listed at $460,000. Served by St. Vrain Valley schools. Listed by Mark Solomon, REALTOR®.",
 
   alternates: {
     canonical: "https://762stonebridge.solomonhomeservices.com/",
@@ -20,7 +21,7 @@ export const metadata = {
   openGraph: {
     title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
     description:
-      "A 2019-built townhome in Parkes at Stonebridge. 3 bed · 3 bath · 1,549 sq ft · 2-car garage. Listed by Mark Solomon, REALTOR®. Schedule a tour today.",
+      "A 2019-built townhome in Parkes at Stonebridge. 3 bed · 2.5 bath · 1,549 sq ft · 2-car garage. Listed by Mark Solomon, REALTOR®. Schedule a tour today.",
     url: "https://762stonebridge.solomonhomeservices.com/",
     siteName: "Solomon Home Services",
     images: [
@@ -39,7 +40,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "762 Stonebridge Drive — Longmont, CO 80503 | $460,000",
     description:
-      "3 bed · 3 bath · 1,549 sq ft · Built 2019 · 2-car garage. Listed by Mark Solomon, REALTOR®.",
+      "3 bed · 2.5 bath · 1,549 sq ft · Built 2019 · 2-car garage. Listed by Mark Solomon, REALTOR®.",
     images: ["/02-MG_6804.jpg"],
   },
   robots: {
@@ -73,6 +74,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
