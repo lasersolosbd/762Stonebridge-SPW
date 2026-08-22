@@ -263,10 +263,10 @@ export default function StonebridgePage() {
             <img src="/02-MG_6804.jpg" alt="762 Stonebridge Drive Exterior" className="w-full h-full object-cover" />
           </div>
           <div className="absolute top-8 left-8">
-            <span className="text-[11px] font-semibold text-[#c9973a] tracking-[0.12em] uppercase bg-[#c9973a]/15 border border-[#c9973a] px-4 py-1.5 rounded">Active Listing</span>
+            <span className="text-[11px] font-semibold text-white tracking-[0.12em] uppercase bg-[#c9973a]/80 border border-[#c9973a] px-4 py-1.5 rounded">Active Listing</span>
           </div>
           <div className="absolute bottom-6 right-6">
-            <span className="text-[10px] font-medium text-[#8a9bbf] tracking-widest uppercase bg-black/50 backdrop-blur-sm border border-white/[0.08] px-4 py-1.5 rounded-full">Offered at: $460,000</span>
+            <span className="text-[10px] font-medium text-white tracking-widest uppercase bg-[#c9973a]/80 backdrop-blur-sm border border-[#c9973a] px-4 py-1.5 rounded-full">Offered at: $460,000</span>
           </div>
         </div>
       </section>
