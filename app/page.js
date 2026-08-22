@@ -2,9 +2,9 @@ import AIIntakeWidget from "@/components/AIIntakeWidget";
 import PhotoGallery from "@/components/PhotoGallery";
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "762 Stonebridge Drive, Longmont CO 80503 | 3BD/3BA Townhome For Sale",
+  title: "762 Stonebridge Drive, Longmont CO 80503 | 3BD/2.5BA Townhome For Sale",
   description:
-    "762 Stonebridge Drive, Longmont, CO 80503. 3 bed, 3 bath, 1,549 sq ft townhome listed at $460,000 in Parkes at Stonebridge. Built 2019. 2-car garage. Walk directly to the community park. Eagle Crest B+, Silver Creek High A. Listed by Mark Solomon, REALTOR® — Solomon Home Services at Real Broker, LLC.",
+    "762 Stonebridge Drive, Longmont, CO 80503. 3 bed, 2.5 bath, 1,549 sq ft townhome listed at $460,000 in Parkes at Stonebridge. Built 2019. 2-car garage. Walk directly to the community park. Eagle Crest B+, Silver Creek High A. Listed by Mark Solomon, REALTOR® — Solomon Home Services at Real Broker, LLC.",
   keywords: [
     "762 Stonebridge Drive Longmont CO",
     "Parkes at Stonebridge townhome for sale",
@@ -43,14 +43,14 @@ const jsonLd = {
       "@id": "https://762stonebridge.solomonhomeservices.com/#listing",
       "name": "762 Stonebridge Drive, Longmont, CO 80503",
       "url": "https://762stonebridge.solomonhomeservices.com",
-      "description": "A 2019-built luxury townhome in the Parkes at Stonebridge community. 3 bedrooms, 3 bathrooms, 1,549 square feet, 2-car garage, versatile study loft, Hardiboard exterior, forced air heat, central A/C. Steps from the community park. Top-rated St. Vrain Valley schools.",
+      "description": "A 2019-built luxury townhome in the Parkes at Stonebridge community. 3 bedrooms, 2.5 bathrooms, 1,549 square feet, 2-car garage, versatile study loft, Hardiboard exterior, forced air heat, central A/C. Steps from the community park. Top-rated St. Vrain Valley schools.",
       "offers": { "@type": "Offer", "price": "460000", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "validFrom": "2026-05-14" },
       "address": { "@type": "PostalAddress", "streetAddress": "762 Stonebridge Drive", "addressLocality": "Longmont", "addressRegion": "CO", "postalCode": "80503", "addressCountry": "US" },
       "geo": { "@type": "GeoCoordinates", "latitude": "40.1583", "longitude": "-105.0603" },
       "image": "https://762stonebridge.solomonhomeservices.com/02-MG_6804.jpg",
       "numberOfRooms": "6",
       "floorSize": { "@type": "QuantitativeValue", "value": 1549, "unitCode": "FTK", "unitText": "square feet" },
-      "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3, "yearBuilt": 2019,
+      "numberOfBedrooms": 3, "numberOfBathroomsTotal": 2.5, "yearBuilt": 2019,
       "amenityFeature": [
         { "@type": "LocationFeatureSpecification", "name": "2-Car Garage", "value": true },
         { "@type": "LocationFeatureSpecification", "name": "Central Air Conditioning", "value": true },
@@ -71,11 +71,11 @@ const jsonLd = {
     {
       "@type": "SingleFamilyResidence", "@id": "https://762stonebridge.solomonhomeservices.com/#property",
       "name": "762 Stonebridge Drive Townhome",
-      "description": "Three-story townhome built in 2019 in Parkes at Stonebridge, Longmont, Colorado. 3 bedrooms, 3 bathrooms (2 full, 1 half), 1,549 sq ft, study at top of stairs, 2-car attached garage, central A/C, forced air heat, Hardiboard fiber cement siding.",
+      "description": "Three-story townhome built in 2019 in Parkes at Stonebridge, Longmont, Colorado. 3 bedrooms, 2.5 bathrooms (2 full, 1 half), 1,549 sq ft, study at top of stairs, 2-car attached garage, central A/C, forced air heat, Hardiboard fiber cement siding.",
       "url": "https://762stonebridge.solomonhomeservices.com",
       "address": { "@type": "PostalAddress", "streetAddress": "762 Stonebridge Drive", "addressLocality": "Longmont", "addressRegion": "CO", "postalCode": "80503", "addressCountry": "US" },
       "floorSize": { "@type": "QuantitativeValue", "value": 1549, "unitCode": "FTK" },
-      "numberOfRooms": 6, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 3, "yearBuilt": 2019,
+      "numberOfRooms": 6, "numberOfBedrooms": 3, "numberOfBathroomsTotal": 2.5, "yearBuilt": 2019,
       "lotSize": { "@type": "QuantitativeValue", "value": 2178, "unitCode": "FTK" },
     },
     {
@@ -88,7 +88,7 @@ const jsonLd = {
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "What is the asking price for 762 Stonebridge Drive, Longmont CO?", "acceptedAnswer": { "@type": "Answer", "text": "762 Stonebridge Drive, Longmont, CO 80503 is listed at $460,000. 3 bed, 3 bath, 1,549 sq ft townhome in Parkes at Stonebridge, listed by Mark Solomon with Solomon Home Services at Real Broker, LLC." } },
+        { "@type": "Question", "name": "What is the asking price for 762 Stonebridge Drive, Longmont CO?", "acceptedAnswer": { "@type": "Answer", "text": "762 Stonebridge Drive, Longmont, CO 80503 is listed at $460,000. 3 bed, 2.5 bath, 1,549 sq ft townhome in Parkes at Stonebridge, listed by Mark Solomon with Solomon Home Services at Real Broker, LLC." } },
         { "@type": "Question", "name": "What subdivision is 762 Stonebridge Drive in?", "acceptedAnswer": { "@type": "Answer", "text": "762 Stonebridge Drive is in the Parkes at Stonebridge subdivision in Longmont, CO 80503 — an 18-acre community with luxury townhomes, a private pocket park, walking trails, and picnic areas." } },
         { "@type": "Question", "name": "What schools serve 762 Stonebridge Drive, Longmont CO?", "acceptedAnswer": { "@type": "Answer", "text": "The property is served by St. Vrain Valley School District: Eagle Crest Elementary (B+), Altona Middle (A-), and Silver Creek High School (A, 96% graduation rate)." } },
         { "@type": "Question", "name": "When was 762 Stonebridge Drive built?", "acceptedAnswer": { "@type": "Answer", "text": "762 Stonebridge Drive was built in 2019 with durable Hardiboard fiber cement siding — essentially newer construction with low deferred maintenance." } },
@@ -179,7 +179,7 @@ const nbhdCards = [
 
 const specs = [
   { label: "Bedrooms", value: "3" },
-  { label: "Bathrooms", value: "3" },
+  { label: "Bathrooms", value: "2.5" },
   { label: "Square Feet", value: "1,549" },
   { label: "Garage", value: "2-Car" },
 ];
@@ -266,7 +266,7 @@ export default function StonebridgePage() {
             <span className="text-[11px] font-semibold text-[#c9973a] tracking-[0.12em] uppercase bg-[#c9973a]/15 border border-[#c9973a] px-4 py-1.5 rounded">Active Listing</span>
           </div>
           <div className="absolute bottom-6 right-6">
-            <span className="text-[10px] font-medium text-[#8a9bbf] tracking-widest uppercase bg-black/50 backdrop-blur-sm border border-white/[0.08] px-4 py-1.5 rounded-full">Parkes at Stonebridge · Built 2019</span>
+            <span className="text-[10px] font-medium text-[#8a9bbf] tracking-widest uppercase bg-black/50 backdrop-blur-sm border border-white/[0.08] px-4 py-1.5 rounded-full">Offered at: $460,000</span>
           </div>
         </div>
       </section>
@@ -301,7 +301,7 @@ export default function StonebridgePage() {
               <div className="space-y-5">
                 <p className="drop-cap text-[17px] text-[#1a2744] leading-[1.75]">Picture your morning routine: coffee in hand, you open your front door, and instead of staring at someone else&apos;s bumper, you step directly into a beautiful community park. Not &quot;nearby.&quot; Not &quot;a short drive.&quot; Literally the park is right there, because someone named this subdivision the Parkes at Stonebridge — yes, with an e — and they had the audacity to make it accurate.</p>
                 <p className="text-[17px] text-[#1a2744] leading-[1.75]">Built in 2019, this 1,549 sq ft townhome with only one owner and this is your opportunity to change that! Hardiboard siding, forced air with central A/C, and well maintained, just for you! It&apos;s the real estate equivalent of buying a certified pre-owned vehicle — except the vehicle is a house, and the park is free.</p>
-                <p className="text-[17px] text-[#1a2744] leading-[1.75]">Three bedrooms, three bathrooms, and a 2-car garage make this place genuinely livable. But here&apos;s what the MLS doesn&apos;t tell you: at the top of the stairs, there&apos;s a placed for a desk to create your own study — that will make you feel like you finally have your life together. Home office? Creative studio? Dedicated &quot;do not disturb&quot; zone? The answer is yes, and also yes, and also yes.</p>
+                <p className="text-[17px] text-[#1a2744] leading-[1.75]">Three bedrooms, 2.5 bathrooms, and a 2-car garage make this place genuinely livable. But here&apos;s what the MLS doesn&apos;t tell you: at the top of the stairs, there&apos;s a placed for a desk to create your own study — that will make you feel like you finally have your life together. Home office? Creative studio? Dedicated &quot;do not disturb&quot; zone? The answer is yes, and also yes, and also yes.</p>
                 <p className="text-[17px] text-[#1a2744] leading-[1.75]">Eagle Crest Elementary (B+), Altona Middle (A-), and Silver Creek High (A) form your school pipeline. The Diagonal makes Boulder a 15-minute commute. And Longmont&apos;s Dry Creek Trail system is essentially your backyard. The question isn&apos;t whether this is a good fit. The question is how fast you want to move on it.</p>
               </div>
               <ul className="mt-8 divide-y divide-[#1a2744]/10">
